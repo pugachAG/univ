@@ -25,13 +25,13 @@ namespace CalcMethLab
             double c = 2;
             double w = 7;
             this.f = x => k * Math.Log(x) + c * Math.Cos(w * x);
-            this.f = x => x * Math.Sqrt(x);
+            //this.f = x => x * Math.Sqrt(x);
             this.n = 3;
             this.initTrig();
             //this.initExp();
             this.a = 1;
             this.b = 3;
-            this.m = 10;
+            this.m = 20;
         }
 
         public int M

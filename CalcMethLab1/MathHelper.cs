@@ -9,6 +9,7 @@ namespace CalcMethLab
     public static class MathHelper
     {
         public const int PointCount = 1000;
+        public const double Epsilon = 0.0000001;
 
         public static double Integrate(Func<double, double> f, double a, double b)
         {
@@ -48,7 +49,7 @@ namespace CalcMethLab
             {
                 int indx = -1;
                 for(int j = 0; j < n; j++)
-                    if (Math.Abs(a[i,j]) > 0.0000001)
+                    if (Math.Abs(a[i, j]) > Epsilon)
                     {
                         indx = j;
                         break;

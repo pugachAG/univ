@@ -8,7 +8,7 @@ namespace CalcMethLab
 {
     public class SmoothingSpline: AproximationMethodBase
     {
-        private const double rho = 0.1; 
+        private const double rho = 10; 
 
         private double getX(int i)
         {
@@ -80,7 +80,15 @@ namespace CalcMethLab
             Matrix Left = this.A + (this.H * this.Rinverse) * this.H.Transpose();
             Matrix Right = this.H * this.ff;
             Matrix vecM = MathHelper.SolveSystemOfLinearEquations(Left, Right);
-            Matrix vecMu = ff -this.Rinverse * H.Transpose() * vecM;
+
+            Matrix ss = Left * vecM - Right;
+            for (int i = 0; i < ss.Data.GetLength(0); i++)
+                for (int j = 0; j < ss.Data.GetLength(1); j++)
+                    if (Math.Abs(ss[i, j]) > MathHelper.Epsilon)
+                        throw new Exception();
+
+            Matrix vecMu = ff - this.Rinverse * H.Transpose() * vecM;
+            ss = vecMu - ff;
             Matrix tmpM = new Matrix(vecM.RowCount + 2, vecM.ColumnCount);
 
             for (int i = 1; i < tmpM.RowCount - 1; i++)
@@ -97,10 +105,10 @@ namespace CalcMethLab
                         if (x >= b)
                             indx = m-1;
                     double h = getH(indx + 1);
-                    return (indx < vecM.RowCount ? vecM[indx, 0] : 0) * Math.Pow((getX(indx+1) - x), 3)/(6*h) +
-                         (indx + 1 < vecM.RowCount ? vecM[indx+1, 0] : 0) * Math.Pow((x-getX(indx)), 3) / (6 * h) +
-                         (vecMu[indx, 0] - (indx < vecM.RowCount ? vecM[indx, 0] : 0) * h * h / 6)* (getX(indx+1) - x)/h +
-                         (vecMu[indx + 1, 0] - (indx + 1 < vecM.RowCount ? vecM[indx + 1, 0] : 0) * h * h / 6) * (x - getX(indx)) / h; ;
+                    return vecM[indx, 0] * Math.Pow((getX(indx+1) - x), 3) / (6 * h) +
+                         vecM[indx+1, 0] * Math.Pow((x-getX(indx)), 3) / (6 * h) +
+                         (vecMu[indx, 0] - vecM[indx, 0] * h * h / 6)* (getX(indx+1) - x)/h +
+                         (vecMu[indx + 1, 0] - vecM[indx + 1, 0] * h * h / 6) * (x - getX(indx)) / h;
 
                 };
 
