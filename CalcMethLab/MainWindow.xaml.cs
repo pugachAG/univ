@@ -23,7 +23,7 @@ namespace CalcMethLab
         public MainWindow()
         {
             InitializeComponent();
-            this.SmoothingSplineDemo();
+            this.IntegralsDemo();
         }
 
         private void MeanSquareMethodDemo(bool isDiscrete = false)
@@ -40,7 +40,6 @@ namespace CalcMethLab
             text.Text = solution.diff.ToString();
         }
 
-
         private void SmoothingSplineDemo()
         {
             AproximationMethodBase solution = new SmoothingSpline();
@@ -53,7 +52,6 @@ namespace CalcMethLab
             plot.DrawDiscrete(solution.f, solution.a, solution.b, solution.M + 1);
             text.Text = solution.diff.ToString();
         }
-        
 
         private void MatrixText()
         {
@@ -61,6 +59,16 @@ namespace CalcMethLab
             Matrix A = new Matrix(new double[] { 1, 2, 3, 3, 2, 1, 2, 1, 3 });
             Matrix B = new Matrix(new double[] { 4, 5, 6, 6, 5, 4, 4, 6, 5 });
             Matrix C = A + B;
+        }
+
+        private void IntegralsDemo()
+        {
+            IntegralCalculation solution = new IntegralCalculation();
+            double upperBound = solution.GetUpperBound();
+            double yDiff = 0.3;
+            plot.Draw(solution.F, 0, upperBound, - yDiff, yDiff);
+
+            text.Text = solution.Integrate().ToString();
         }
     }
 }

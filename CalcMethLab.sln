@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Express 2012 for Windows Desktop
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcMethLab1", "CalcMethLab1\CalcMethLab1.csproj", "{E190095E-0122-4F08-ADCF-0E59AA6E7690}"
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalcMethLab", "CalcMethLab\CalcMethLab.csproj", "{E190095E-0122-4F08-ADCF-0E59AA6E7690}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

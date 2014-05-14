@@ -20,7 +20,7 @@
             </local:PlotDrawer>
         </Border>
         <TextBlock
-            Width="100"    
+            Width="300"    
             x:Name="text"
             />
     </Grid>
