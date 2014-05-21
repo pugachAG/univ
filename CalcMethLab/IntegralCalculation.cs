@@ -37,13 +37,18 @@ namespace CalcMethLab
                 double k = (i % n == 0) ? 1 : (i % 2 == 1 ? 4 : 2);
                 result += this.F(x) * k;
             }
-            result *= (b - a) / (3 * (n + 1));
+            result *= dx / 3;
             return result;
         }
 
         private double GetSimpsonCoef()
         {
             return 1.0 / 15.0;
+        }
+
+        public double getPreciseValue()
+        {
+            return 0.25;
         }
 
         public double Integrate()
@@ -55,7 +60,7 @@ namespace CalcMethLab
             {
                 n *= 2;
                 double cur = CalcSimpson(a, b, n);
-                if (Math.Abs((cur - prev) / GetSimpsonCoef()) < Epsilon / 2)
+                if (Math.Abs((cur - prev) * GetSimpsonCoef()) < Epsilon / 2)
                     return cur;
                 prev = cur;
             }

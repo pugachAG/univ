@@ -68,7 +68,12 @@ namespace CalcMethLab
             double yDiff = 0.3;
             plot.Draw(solution.F, 0, upperBound, - yDiff, yDiff);
 
-            text.Text = solution.Integrate().ToString();
+            double result = solution.Integrate();
+            double deviation = Math.Abs(result - solution.getPreciseValue());
+            text.Text = "Calculated value: " + result.ToString() + Environment.NewLine;
+            text.Text += "Precise value: " + solution.getPreciseValue().ToString() + Environment.NewLine;
+            text.Text += "Deviation: " + deviation.ToString() + Environment.NewLine;
+            text.Text += "Epsilon: " + IntegralCalculation.Epsilon.ToString() + Environment.NewLine;
         }
     }
 }

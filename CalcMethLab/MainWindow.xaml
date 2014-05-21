@@ -4,24 +4,28 @@
         xmlns:local="clr-namespace:CalcMethLab"
         Title="MainWindow" Height="625" Width="525">
     <Grid>
-        <Border
-            x:Name="border"
-            BorderBrush="Black"
-            Width="500"
-            Height="500"
-            BorderThickness="0">
+        <StackPanel>
+            <TextBlock
+                Width="300"    
+                TextWrapping="Wrap"
+                x:Name="text"
+                />
+            <Border
+                x:Name="border"
+                BorderBrush="Black"
+                Width="500"
+                Height="500"
+                BorderThickness="0">
             
-            <local:PlotDrawer
-                x:Name="plot"
-                Width="{Binding ElementName=border, Path=Width}"
-                Height="{Binding ElementName=border, Path=Height}"
-                VerticalAlignment="Stretch"
-                >
-            </local:PlotDrawer>
-        </Border>
-        <TextBlock
-            Width="300"    
-            x:Name="text"
-            />
+                <local:PlotDrawer
+                    x:Name="plot"
+                    Width="{Binding ElementName=border, Path=Width}"
+                    Height="{Binding ElementName=border, Path=Height}"
+                    VerticalAlignment="Stretch"
+                    >
+                </local:PlotDrawer>
+            </Border>
+        
+        </StackPanel>
     </Grid>
 </Window>
