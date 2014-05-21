@@ -8,12 +8,15 @@ namespace CalcMethLab
 {
     public class IntegralCalculation
     {
-        public const double Epsilon = 0.000001;
+        public const double Epsilon = 0.001;
 
         public IntegralCalculation()
         {
             this.F = x => Math.Exp(-2 * x) * Math.Sin(2 * x);
         }
+
+        public string IterationProcess { get; private set; }
+
 
         public Func<double, double> F { get; set; }
 
@@ -53,15 +56,22 @@ namespace CalcMethLab
 
         public double Integrate()
         {
+            StringBuilder iterationProcessBuilder = new StringBuilder();
+
             double a = 0, b = GetUpperBound();
             int n = 2;
             double prev = CalcSimpson(a, b, n);
             while (true)
             {
+                iterationProcessBuilder.Append(string.Format("I(h/{0}) = {1}", n, prev) + Environment.NewLine);
                 n *= 2;
                 double cur = CalcSimpson(a, b, n);
+
                 if (Math.Abs((cur - prev) * GetSimpsonCoef()) < Epsilon / 2)
+                {
+                    this.IterationProcess = iterationProcessBuilder.ToString();
                     return cur;
+                }
                 prev = cur;
             }
         }

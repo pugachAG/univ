@@ -67,13 +67,19 @@ namespace CalcMethLab
             double upperBound = solution.GetUpperBound();
             double yDiff = 0.3;
             plot.Draw(solution.F, 0, upperBound, - yDiff, yDiff);
+            
 
             double result = solution.Integrate();
             double deviation = Math.Abs(result - solution.getPreciseValue());
-            text.Text = "Calculated value: " + result.ToString() + Environment.NewLine;
-            text.Text += "Precise value: " + solution.getPreciseValue().ToString() + Environment.NewLine;
-            text.Text += "Deviation: " + deviation.ToString() + Environment.NewLine;
-            text.Text += "Epsilon: " + IntegralCalculation.Epsilon.ToString() + Environment.NewLine;
+
+            Action<string, object> print = (pref, obj) => text.Text += pref + obj.ToString() + Environment.NewLine;
+
+            print("a: ", upperBound);
+            print("Calculated value: ", result);
+            print("Precise value: ", solution.getPreciseValue());
+            print("Deviation: ", deviation);
+            print("Epsilon: ", IntegralCalculation.Epsilon);
+            print("Iteration process: " + Environment.NewLine, solution.IterationProcess);
         }
     }
 }
