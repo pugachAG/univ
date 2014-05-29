@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QueuingSystemsModel
 {
-    public class MainViewModel : ViewModelBase
+    public class MainViewModel : BaseViewModel
     {
         public DelegateCommand Start { get; private set; }
         public DelegateCommand Pause { get; private set; }
