@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QueuingSystemsModel.Probability
+namespace QueuingSystemsModel
 {
     public static class RandomNumberGenerator
     {

@@ -4,13 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace QueuingSystemsModel.Probability
+namespace QueuingSystemsModel
 {
     public class ExponentialDistribution : IDistribution
     {
-        private const double maxValue = 100;
-        private const int intervalsCount = 10000;
-
         public double Lambda { get; private set; }
 
         public ExponentialDistribution(double lambda)
@@ -28,7 +25,7 @@ namespace QueuingSystemsModel.Probability
         public double GetDistributionRandomValue()
         {
             double x = RandomNumberGenerator.GetRandomDouble();
-            return x;
+            return -1.0 * Math.Log(1 - x) / Lambda; 
         }
     }
 
