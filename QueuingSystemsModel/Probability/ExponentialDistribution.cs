@@ -27,6 +27,12 @@ namespace QueuingSystemsModel
             double x = RandomNumberGenerator.GetRandomDouble();
             return -1.0 * Math.Log(1 - x) / Lambda; 
         }
+
+
+        public double Mean
+        {
+            get { return 1 / this.Lambda; }
+        }
     }
 
 }

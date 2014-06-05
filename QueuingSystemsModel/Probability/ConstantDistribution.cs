@@ -27,5 +27,11 @@ namespace QueuingSystemsModel
             else
                 return 1;
         }
+
+
+        public double Mean
+        {
+            get { return value; }
+        }
     }
 }

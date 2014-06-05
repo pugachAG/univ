@@ -11,5 +11,7 @@ namespace QueuingSystemsModel
         double GetDistributionRandomValue();
 
         double DistributionFunctionValue(double x);
+
+        double Mean { get; }
     }
 }

@@ -125,13 +125,33 @@
                 
                 <StackPanel Grid.Column="1" Orientation="Vertical">
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="5" Text="Average Pending Requests Count" />
+                        <TextBlock Margin="5" Text="Practical Average Pending Requests Count" />
                         <TextBlock Margin="5" Text="{Binding Core.AveragePendingRequestsCount}" />
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="5" Text="Average Total Requests Count" />
-                        <TextBlock Margin="5" Text="{Binding Core.AverageTotalRequestsCount}" />
+                        <TextBlock Margin="5" Text="Theoretical Average Pending Requests Count" />
+                        <TextBlock Margin="5" Text="{Binding Core.AveragePendingRequestsCountTheorectical}" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="5" Text="Practical Average Busy Requests" />
+                        <TextBlock Margin="5" Text="{Binding Core.AverageBusyServices}" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="5" Text="Theoretical Average Busy Requests" />
+                        <TextBlock Margin="5" Text="{Binding Core.AverageBusyServicesTheorectical}" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="5" Text="Practical P(waiting)" />
+                        <TextBlock Margin="5" Text="{Binding Core.WaitingProbability}" />
+                    </StackPanel>
+                    
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Margin="5" Text="Theoretical P(waiting)" />
+                        <TextBlock Margin="5" Text="{Binding Core.PWaitingTheoretical}" />
                     </StackPanel>
 
                 </StackPanel>
