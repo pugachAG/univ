@@ -201,16 +201,21 @@ namespace QueuingSystemsModel
             int n = this.ServiecesCount;
             double denom = 0;
             double fact = 1;
-            for (int i = 0; i < n; i++)
+            if (n > Rho)
             {
-                fact *= this.Rho / (double) Math.Max(i, 1);
-                denom += fact;
+                for (int i = 0; i < n; i++)
+                {
+                    fact *= this.Rho / (double)Math.Max(i, 1);
+                    denom += fact;
+                }
+                fact *= this.Rho / (double)n;
+                double tmp = fact * (n / (n - Rho));
+                denom += tmp;
+                double num = tmp;
+                this.PWaitingTheoretical = Math.Min(1, num / denom);
             }
-            fact *= this.Rho / (double)n;
-            double tmp = fact * (n / (n - Rho));
-            denom += tmp;
-            double num =  tmp;
-            this.PWaitingTheoretical = Math.Min(1, num / denom);
+            else
+                this.PWaitingTheoretical = 1.0;
             this.AveragePendingRequestsCountTheorectical = n >= this.Rho ? this.PWaitingTheoretical * this.Rho / (n - this.Rho) : double.PositiveInfinity;
             this.AverageBusyServicesTheorectical = Math.Min(this.Rho, n);
         }
