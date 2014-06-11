@@ -144,7 +144,7 @@ namespace CalcMethLab
                 int j = i;
                 phi[i] = x => Math.Pow(x, j);
             }
-            this.isTrig = true;
+            this.isTrig = false;
         }
     }
 }
