@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPMMath", "WPMMath\WPMMath.csproj", "{1CE4C3F4-E520-4C4B-B65E-B18C02C553DE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WPMMathTest", "WPMMathTest\WPMMathTest.csproj", "{29852BC0-B77F-480E-B31F-17F6DE296857}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{1CE4C3F4-E520-4C4B-B65E-B18C02C553DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CE4C3F4-E520-4C4B-B65E-B18C02C553DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CE4C3F4-E520-4C4B-B65E-B18C02C553DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29852BC0-B77F-480E-B31F-17F6DE296857}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29852BC0-B77F-480E-B31F-17F6DE296857}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29852BC0-B77F-480E-B31F-17F6DE296857}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29852BC0-B77F-480E-B31F-17F6DE296857}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

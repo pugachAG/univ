@@ -42,6 +42,7 @@
     <Compile Include="Helpers\RandomHelper.cs" />
     <Compile Include="Probability\Distributions\IRandomGenerator.cs" />
     <Compile Include="Probability\Distributions\NormalDistributionGenerator.cs" />
+    <Compile Include="Probability\Distributions\UniformDistributionGenerator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

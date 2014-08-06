@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,11 +8,14 @@ using WPMMath.Helpers;
 
 namespace WPMMath.Probability.Distributions
 {
+    /// <summary>
+    /// Box–Muller transform based Normal Distribution Generator
+    /// </summary>
     public class NormalDistributionGenerator: IRandomGenerator
     {
         private decimal mean;
         private decimal variance;
-        private Random random = null;
+        private UniformDistributionGenerator standatdUniformDistributionGenerator = new UniformDistributionGenerator();
         
         /// <summary>
         /// Initializes NormalDistributionGenerator instance with mean = 0 and variance = 1 
@@ -20,7 +24,6 @@ namespace WPMMath.Probability.Distributions
         {
             this.mean = 0;
             this.variance = 1;
-            this.random = RandomHelper.CreateRandom();
         }
 
         /// <summary>
@@ -29,15 +32,25 @@ namespace WPMMath.Probability.Distributions
         /// <param name="mean">mean</param>
         /// <param name="variance">variance</param>
         public NormalDistributionGenerator(decimal mean, decimal variance)
-            : this()
         {
+            Contract.Requires(variance >= 0, "Variance non-negative");
             this.mean = mean;
             this.variance = variance;
         }
 
         public decimal GetNext()
         {
-            throw new NotImplementedException();
+            decimal standardDistributedValue = GetStandardNormalDistributionValue();
+            return mean + standardDistributedValue * (decimal) Math.Sqrt((double)variance);
         }
+
+        private decimal GetStandardNormalDistributionValue()
+        {
+            double u1 = (double)standatdUniformDistributionGenerator.GetNext();
+            double u2 = (double)standatdUniformDistributionGenerator.GetNext();
+            double result = Math.Sqrt(-2.0 * Math.Log(u1)) * Math.Cos(2 * Math.PI * u2);
+            return (decimal)result;
+        }
+
     }
 }
