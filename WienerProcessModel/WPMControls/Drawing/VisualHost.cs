@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,13 +19,14 @@ namespace WPMControls.Drawing
     public class VisualHost : FrameworkElement
     {
         public static readonly DependencyProperty BackgroundProperty =
-             DependencyProperty.Register("Background", typeof(Brush), typeof(VisualHost), new FrameworkPropertyMetadata(Brushes.Transparent, BackgroundPropertyChanged));
+             DependencyProperty.Register("Background", typeof(Brush), typeof(VisualHost), new FrameworkPropertyMetadata(null, BackgroundPropertyChanged));
 
-        VisualCollection children;
+        private VisualCollection children;
 
         public VisualHost()
         {
             this.children = new VisualCollection(this);
+            this.Background = Brushes.Transparent;
         }
 
     #region Properties
@@ -41,7 +43,19 @@ namespace WPMControls.Drawing
             }
         }
 
+        public int ChildrenCount
+        {
+            get
+            {
+                Contract.Ensures(Contract.Result<int>() >= 0, "count greater than or equals to zero");
+
+                return this.children.Count - 1;
+            }
+        }
+
     #endregion
+
+    #region FrameworkElement members override
 
         protected override int VisualChildrenCount
         {
@@ -55,6 +69,8 @@ namespace WPMControls.Drawing
         {
             return this.children[index];    
         }
+
+    #endregion
 
     #region Dependency properties event handlers
 
@@ -73,7 +89,10 @@ namespace WPMControls.Drawing
             if (sender.children.Count == 0)
                 sender.children.Add(visual);
             else
+            {
+                sender.children[0] = null;
                 sender.children[0] = visual;
+            }
         }
 
     #endregion

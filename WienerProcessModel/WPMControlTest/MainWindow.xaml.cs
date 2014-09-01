@@ -23,6 +23,7 @@ namespace WPMControlTest
         public MainWindow()
         {
             InitializeComponent();
+            canvas.Background = Brushes.Blue;
         }
     }
 }
