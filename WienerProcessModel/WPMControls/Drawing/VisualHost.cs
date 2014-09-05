@@ -18,10 +18,27 @@ namespace WPMControls.Drawing
 {
     public class VisualHost : FrameworkElement
     {
+
+        #region Dependency Properties
+
+        public Brush Background
+        {
+            get { return (Brush)GetValue(BackgroundProperty); }
+            set { SetValue(BackgroundProperty, value); }
+        }
+
         public static readonly DependencyProperty BackgroundProperty =
              DependencyProperty.Register("Background", typeof(Brush), typeof(VisualHost), new FrameworkPropertyMetadata(null, BackgroundPropertyChanged));
 
+        #endregion
+
+        #region Members
+
         private VisualCollection children;
+
+        #endregion
+
+        #region Constructors
 
         public VisualHost()
         {
@@ -29,19 +46,9 @@ namespace WPMControls.Drawing
             this.Background = Brushes.Transparent;
         }
 
-    #region Properties
-        
-        public Brush Background
-        {
-            get
-            {
-                return (Brush)GetValue(BackgroundProperty);
-            }
-            set
-            {
-                SetValue(BackgroundProperty, value);
-            }
-        }
+        #endregion
+
+        #region Properties
 
         public int ChildrenCount
         {
@@ -53,9 +60,20 @@ namespace WPMControls.Drawing
             }
         }
 
-    #endregion
+        #endregion
 
-    #region FrameworkElement members override
+        #region Methods
+
+        public void AddChild(DrawingVisual child)
+        {
+            Contract.Requires(child != null, "child != null");
+
+            this.children.Add(child);
+        }
+
+        #endregion
+
+        #region FrameworkElement members override
 
         protected override int VisualChildrenCount
         {
@@ -70,9 +88,9 @@ namespace WPMControls.Drawing
             return this.children[index];    
         }
 
-    #endregion
+        #endregion
 
-    #region Dependency properties event handlers
+        #region Dependency properties event handlers
 
         private static void BackgroundPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
@@ -95,7 +113,7 @@ namespace WPMControls.Drawing
             }
         }
 
-    #endregion
+        #endregion
     
     }
 }

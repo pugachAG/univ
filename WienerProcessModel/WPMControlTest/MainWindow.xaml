@@ -4,13 +4,14 @@
         xmlns:ctrs="clr-namespace:WPMControls.Drawing;assembly=WPMControls"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        <ctrs:VisualHost
+        <ctrs:PlotDrawer
             Width="100"
             Height="100"
             Background="Black"
+            GridBackround="AntiqueWhite"
             x:Name="canvas" >
             
-        </ctrs:VisualHost>
+        </ctrs:PlotDrawer>
         
     </Grid>
 </Window>
