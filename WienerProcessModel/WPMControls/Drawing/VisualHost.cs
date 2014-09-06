@@ -24,7 +24,11 @@ namespace WPMControls.Drawing
         public Brush Background
         {
             get { return (Brush)GetValue(BackgroundProperty); }
-            set { SetValue(BackgroundProperty, value); }
+            set 
+            { 
+                SetValue(BackgroundProperty, value);
+                OnBackroundChaned();
+            }
         }
 
         public static readonly DependencyProperty BackgroundProperty =
@@ -44,6 +48,8 @@ namespace WPMControls.Drawing
         {
             this.children = new VisualCollection(this);
             this.Background = Brushes.Transparent;
+            this.Loaded += (o, e) => OnBackroundChaned();
+            this.SizeChanged += (o, e) => OnBackroundChaned();
         }
 
         #endregion
@@ -62,13 +68,33 @@ namespace WPMControls.Drawing
 
         #endregion
 
-        #region Methods
+        #region Public Methods
 
         public void AddChild(DrawingVisual child)
         {
             Contract.Requires(child != null, "child != null");
 
             this.children.Add(child);
+        }
+
+        public void SetChild(DrawingVisual child, int index)
+        {
+            Contract.Requires(child != null, "child != null");
+            Contract.Requires(index < ChildrenCount && index + ChildrenCount >= 0, "index < ChildrenCount and index + ChildrenCount >= 0");
+
+            int i = (index < 0 ? index + ChildrenCount : index) + 1;
+
+            this.children[i] = null;
+            this.children[i] = child;
+        }
+
+        #endregion
+
+        #region Private/Protected Methods
+
+        private void OnBackroundChaned()
+        {
+            BackgroundPropertyChanged(this, new DependencyPropertyChangedEventArgs(BackgroundProperty, 0, Background));
         }
 
         #endregion
@@ -100,7 +126,7 @@ namespace WPMControls.Drawing
             DrawingVisual visual = new DrawingVisual();
             DrawingContext context = visual.RenderOpen();
 
-            context.DrawRectangle(brush, null, new Rect(0, 0, sender.Width, sender.Height));
+            context.DrawRectangle(brush, null, new Rect(0, 0, sender.ActualWidth, sender.ActualHeight));
 
             context.Close();
 

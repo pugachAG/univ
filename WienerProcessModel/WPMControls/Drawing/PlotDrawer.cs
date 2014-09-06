@@ -15,52 +15,72 @@ namespace WPMControls.Drawing
         public double MinimumX
         {
             get { return (double)GetValue(MinimumXProperty); }
-            set { SetValue(MinimumXProperty, value); }
+            set 
+            {
+                SetValue(MinimumXProperty, value);
+                UpdateGridDrawingProperties();
+            }
         }
 
         // Using a DependencyProperty as the backing store for MinimumX.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MinimumXProperty =
-            DependencyProperty.Register("MinimumX", typeof(double), typeof(PlotDrawer), new PropertyMetadata(default(double), GridSizePropertiesChanged));
+            DependencyProperty.Register("MinimumX", typeof(double), typeof(PlotDrawer), new PropertyMetadata(default(double), GridPropertiesChanged));
 
         public double MaximumX
         {
             get { return (double)GetValue(MaximumXProperty); }
-            set { SetValue(MaximumXProperty, value); }
+            set 
+            {
+                SetValue(MaximumXProperty, value);
+                UpdateGridDrawingProperties();
+            }
         }
 
         // Using a DependencyProperty as the backing store for MaximumX.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MaximumXProperty =
-            DependencyProperty.Register("MaximumX", typeof(double), typeof(PlotDrawer), new PropertyMetadata(default(double), GridSizePropertiesChanged));
+            DependencyProperty.Register("MaximumX", typeof(double), typeof(PlotDrawer), new PropertyMetadata(default(double), GridPropertiesChanged));
 
         public double MinimumY
         {
             get { return (double)GetValue(MinimumYProperty); }
-            set { SetValue(MinimumYProperty, value); }
+            set 
+            {
+                SetValue(MinimumYProperty, value);
+                UpdateGridDrawingProperties();
+            }
         }
 
         // Using a DependencyProperty as the backing store for MinimumY.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MinimumYProperty =
-            DependencyProperty.Register("MinimumY", typeof(double), typeof(PlotDrawer), new PropertyMetadata(default(double), GridSizePropertiesChanged));
+            DependencyProperty.Register("MinimumY", typeof(double), typeof(PlotDrawer), new PropertyMetadata(default(double), GridPropertiesChanged));
 
         public double MaximumY
         {
             get { return (double)GetValue(MaximumYProperty); }
-            set { SetValue(MaximumYProperty, value); }
+            set 
+            { 
+                SetValue(MaximumYProperty, value);
+                UpdateGridDrawingProperties();
+            }
         }
 
         // Using a DependencyProperty as the backing store for MaximumY.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MaximumYProperty =
-            DependencyProperty.Register("MaximumY", typeof(double), typeof(PlotDrawer), new PropertyMetadata(default(double), GridSizePropertiesChanged));
+            DependencyProperty.Register("MaximumY", typeof(double), typeof(PlotDrawer), new PropertyMetadata(default(double), GridPropertiesChanged));
 
         public Brush GridBackround
         {
             get { return (Brush)GetValue(GridBackroundProperty); }
-            set { SetValue(GridBackroundProperty, value); }
+            set 
+            {
+                SetValue(GridBackroundProperty, value);
+                UpdateGridDrawingProperties();
+            }
         }
 
         // Using a DependencyProperty as the backing store for GridBackround.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty GridBackroundProperty =
-            DependencyProperty.Register("GridBackround", typeof(Brush), typeof(PlotDrawer), new PropertyMetadata(null, GridSizePropertiesChanged));
+            DependencyProperty.Register("GridBackround", typeof(Brush), typeof(PlotDrawer), new PropertyMetadata(null, GridPropertiesChanged));
 
         #endregion
 
@@ -74,6 +94,8 @@ namespace WPMControls.Drawing
 
         public PlotDrawer()
         {
+            this.Loaded += (o, e) => OnGridPropertyChanged();
+            this.SizeChanged += (o, e) => OnGridPropertyChanged();
         }
 
         #endregion
@@ -86,21 +108,29 @@ namespace WPMControls.Drawing
             gridDrawing.MaxX = MaximumX;
             gridDrawing.MinY = MinimumY;
             gridDrawing.MaxY = MaximumY;
-            gridDrawing.ParentWidth = Width;
-            gridDrawing.ParentHeight = Height;
+            gridDrawing.ParentWidth = ActualWidth;
+            gridDrawing.ParentHeight = ActualHeight;
             gridDrawing.GridBackround = GridBackround;
+        }
+
+        private void OnGridPropertyChanged()
+        {
+            GridPropertiesChanged(this, new DependencyPropertyChangedEventArgs(MinimumXProperty, 0, 0));
         }
 
         #endregion
 
         #region Dependency properties event handlers
 
-        private static void GridSizePropertiesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void GridPropertiesChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             PlotDrawer sender = (PlotDrawer)d;
             sender.UpdateGridDrawingProperties();
             DrawingVisual drawing = sender.gridDrawing.DrawGrid();
-            sender.AddChild(drawing);
+            if (sender.ChildrenCount == 0)
+                sender.AddChild(drawing);
+            else
+                sender.SetChild(drawing, 0);
         }
 
         #endregion
