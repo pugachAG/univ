@@ -13,6 +13,6 @@ string toBeOrNotToBe = "toBeOrNotToBe.txt";
 
 int main()
 {
-	Core::ProcessQuery(testDataPathPrefix + testDoc1);
+	Core::ProcessQuery(testDataPathPrefix + testDoc2);
 	getchar();
 }

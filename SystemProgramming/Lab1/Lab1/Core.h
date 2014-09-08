@@ -29,7 +29,7 @@ class DataHandler
 public:
 	DataHandler();
 
-	void HandleChunk(string& str);
+	void HandleChunk(const string& str);
 
 	pair<vector<string>, int> GetMostFrequentWords();
 
@@ -45,5 +45,5 @@ private:
 class Core
 {
 public:
-	static void ProcessQuery(string filePath); 
+	static void ProcessQuery(const string& filePath); 
 };

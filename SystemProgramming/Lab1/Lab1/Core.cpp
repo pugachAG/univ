@@ -36,7 +36,7 @@ DataHandler::DataHandler()
 {
 }
 
-void DataHandler::HandleChunk(string& str)
+void DataHandler::HandleChunk(const string& str)
 {
 	LOGI("HandleChunk start");
 	string query = previousQueryResidue + str;
@@ -90,7 +90,7 @@ pair<vector<string>, int> DataHandler::GetMostFrequentWords()
 	return result;
 }
 
-void Core::ProcessQuery(string filePath)
+void Core::ProcessQuery(const string& filePath)
 {
 	try
 	{
