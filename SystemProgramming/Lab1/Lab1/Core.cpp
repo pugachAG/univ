@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -29,7 +30,7 @@ string DataProvider::GetNextChunk()
 bool DataProvider::CanGetNextChunk()
 {
 	LOGI("File tellg() = %d", (int)file.tellg());
-	return file;
+	return !file.eof();
 }
 
 DataHandler::DataHandler()
@@ -61,7 +62,7 @@ void DataHandler::HandleChunk(const string& str)
 
 bool DataHandler::IsSeparator(char& ch)
 {
-	return !isalpha(ch);
+	return ch >= -1 && ch <= 255 && !isalpha(ch);
 }
 
 pair<vector<string>, int> DataHandler::GetMostFrequentWords()
