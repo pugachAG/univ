@@ -1,0 +1,13 @@
+abc 1
+abfgbc 1
+de 1
+dgbc 1
+dgbfe 1
+abfgbfgbfgbfgbfgbfgbfgbfgbfgbfgbfgbc 1
+a 0
+abb 0
+abcbabcbc 0
+abf 0
+abfga 0
+dee 0
+dgbfgbfgfbcccceee 0
