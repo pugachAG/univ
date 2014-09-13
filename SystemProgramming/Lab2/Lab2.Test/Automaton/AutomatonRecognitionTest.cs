@@ -13,11 +13,8 @@ namespace Lab2.Test.Automaton
     [TestClass]
     public class AutomatonRecognitionTest
     {
-        const string FiniteAutomatonTestDefinitionPath = "Assets//Automaton1Definition.txt";
-        const string FiniteAutomatonTestTestsPath = "Assets//Automaton1Tests.txt";
-
         [TestMethod]
-        public void TestFiniteStateAutomaton()
+        public void AutomatonRecognition()
         {
             string[] automatonDefsPaths = AssetsPathHepler.GetAssetsAutomatonDefinitionsPaths();
             string[] automatonTestsPaths = AssetsPathHepler.GetAssetsAutomatonTestsPaths();
