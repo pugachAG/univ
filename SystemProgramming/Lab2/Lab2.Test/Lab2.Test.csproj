@@ -51,6 +51,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Assets\AssetsPathHepler.cs" />
+    <Compile Include="Automaton\AutomatonBuilderFactory.cs" />
     <Compile Include="Automaton\AutomatonRecognitionTest.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -62,10 +63,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Automaton1Definition.txt">
+    <Content Include="Assets\Automaton1Tests.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\Automaton1Tests.txt">
+    <Content Include="Assets\Automaton1Definition.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

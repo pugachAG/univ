@@ -1,8 +1,13 @@
-5
-1 2 a
-2 3 b
-3 4 f
-3 5 c
-1 4 d
-4 5 e
-4 2 g
+abc 1
+abfgbc 1
+de 1
+dgbc 1
+dgbfe 1
+abfgbfgbfgbfgbfgbfgbfgbfgbfgbfgbfgbc 1
+a 0
+abb 0
+abcbabcbc 0
+abf 0
+abfga 0
+dee 0
+dgbfgbfgfbcccceee 0
