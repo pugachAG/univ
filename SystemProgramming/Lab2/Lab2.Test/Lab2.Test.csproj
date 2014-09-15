@@ -51,7 +51,6 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Assets\AssetsPathHepler.cs" />
-    <Compile Include="Automaton\AutomatonBuilderFactory.cs" />
     <Compile Include="Automaton\AutomatonRecognitionTest.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -48,6 +48,7 @@
     <Compile Include="Automaton\StateDescription.cs" />
     <Compile Include="Automaton\Sybmol.cs" />
     <Compile Include="Automaton\Transition.cs" />
+    <Compile Include="IO\AutomatonReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,4 +1,5 @@
 ﻿using Lab2.Automaton;
+using Lab2.IO;
 using Lab2.Test.Assets;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -35,42 +36,14 @@ namespace Lab2.Test.Automaton
 
         private IAutomaton ReadAutomaton(string fname)
         {
-            IIOAutomatonBuilder builder = AutomatonBuilderFactory.CreateAutomatonBuilder();
             string[] lines = File.ReadAllLines(fname);
-            int[] finishStates = lines[0].Split(' ').Select(str => int.Parse(str.Trim())).ToArray();
-            HashSet<int> states = new HashSet<int>();
-            Action<int> addStateAction = k =>
-                {
-                    if (!states.Contains(k))
-                    {
-                        states.Add(k);
-                        builder.AddState(k);
-                    }
-                };
-            for (int i = 1; i < lines.Length; i++)
-            {
-                string[] line = lines[i].Split(' ').Select(str => str.Trim()).ToArray();
-                int from = int.Parse(line[0]);
-                addStateAction(from);
-                int to = int.Parse(line[1]);
-                addStateAction(to);
-                char? label = line[2] == "eps" ? null : new char?(line[2][0]);
-                builder.AddTransition(from, to, label);
-            }
-            return builder.GetAutomaton();
+            return AutomatonReader.ReadAutomaton(lines);
         }
 
         public Dictionary<string, bool> ReadTests(string fname)
         {
             string[] lines = File.ReadAllLines(fname);
-            Dictionary<string, bool> result = new Dictionary<string, bool>();
-            foreach (string line in lines)
-            {
-                string[] lineParts = line.Split(' ').Select(str => str.Trim()).ToArray();
-                bool val = lineParts[1] != "0";
-                result[lineParts[0]] = val;
-            }
-            return result;
+            return AutomatonReader.ReadTests(lines);
         }
     }
 }
