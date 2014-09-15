@@ -11,7 +11,7 @@ namespace Lab2.Test.Automaton
     {
         public static IIOAutomatonBuilder CreateAutomatonBuilder()
         {
-            throw new NotImplementedException();
+            return new AutomatonBuilder();
         }
     }
 }

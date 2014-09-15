@@ -38,9 +38,20 @@ namespace Lab2.Automaton
             head.AddNewTransition(symbol, tale);
         }
 
+        public void SetStartState(int identifier)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetFinhState(int identifier)
+        {
+            throw new NotImplementedException();
+        }
+
         public IAutomaton GetAutomaton()
         {
             return automaton; 
         }
+
     }
 }

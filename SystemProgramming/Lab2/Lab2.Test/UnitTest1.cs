@@ -7,11 +7,9 @@ namespace Lab2.Test
     [TestClass]
     public class UnitTest1
     {
-        [TestMethod]
+        //[TestMethod]
         public void TestMethod1()
         {
-            string ss = "Assets//Automaton1Tests.txt";
-            string ff = File.ReadAllText(ss);
         }
     }
 }

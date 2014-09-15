@@ -12,6 +12,10 @@ namespace Lab2.Automaton
 
         void AddTransition(int from, int to, char? label);
 
+        void SetStartState(int identifier);
+
+        void SetFinhState(int identifier);
+
         IAutomaton GetAutomaton();
     }
 }
