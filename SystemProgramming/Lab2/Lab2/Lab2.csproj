@@ -41,9 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Automaton\AutomatonBuilder.cs" />
     <Compile Include="Automaton\IIOAutomatonBuilder.cs" />
     <Compile Include="Automaton\FiniteStateAutomaton.cs" />
     <Compile Include="Automaton\IAutomaton.cs" />
+    <Compile Include="Automaton\StateDescription.cs" />
+    <Compile Include="Automaton\Sybmol.cs" />
+    <Compile Include="Automaton\Transition.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
