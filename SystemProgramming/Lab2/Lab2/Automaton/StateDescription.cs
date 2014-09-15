@@ -8,17 +8,23 @@ namespace Lab2.Automaton
 {
     public class StateDescription
     {
+
+        private List<Transition> transitions = new List<Transition>();
+
         public string Name { get; set; }
-        public List<Transition> Transitions { get; private set; }
         public bool IsStart { get; set; }
         public bool IsFinish { get; set; }
 
         public StateDescription(string name)
         {
             this.Name = name;
-            this.Transitions = new List<Transition>();
             this.IsStart = false;
             this.IsFinish = false;
+        }
+
+        public void AddNewTransition(SymbolBase label, StateDescription to)
+        {
+            this.transitions.Add(new Transition(label, to));
         }
     }
 }

@@ -8,10 +8,10 @@ namespace Lab2.Automaton
 {
     public class Transition
     {
-        public SybmolBase Label { get; set; }
+        public SymbolBase Label { get; set; }
         public StateDescription Tale { get; set; }
 
-        public Transition(SybmolBase label, StateDescription tale)
+        public Transition(SymbolBase label, StateDescription tale)
         {
             this.Label = label;
             this.Tale = tale;

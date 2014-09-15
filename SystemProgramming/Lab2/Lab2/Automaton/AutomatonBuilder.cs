@@ -25,7 +25,7 @@ namespace Lab2.Automaton
             {
                 throw new ArgumentException();
             }
-            SybmolBase symbol = null;
+            SymbolBase symbol = null;
             
             if (label.HasValue)
             {
@@ -35,7 +35,7 @@ namespace Lab2.Automaton
             {
                 symbol = new EpsilonSymbol();
             }
-
+            head.AddNewTransition(symbol, tale);
         }
 
         public IAutomaton GetAutomaton()

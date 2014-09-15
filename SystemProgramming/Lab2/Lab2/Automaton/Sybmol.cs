@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Lab2.Automaton
 {
-    public abstract class SybmolBase
+    public abstract class SymbolBase
     {
     }
 
-    public class CharSybmol : SybmolBase
+    public class CharSybmol : SymbolBase
     {
         public char Value { get; set; }
 
@@ -20,7 +20,7 @@ namespace Lab2.Automaton
         }
     }
 
-    public class EpsilonSymbol : SybmolBase
+    public class EpsilonSymbol : SymbolBase
     {
     }
 }
