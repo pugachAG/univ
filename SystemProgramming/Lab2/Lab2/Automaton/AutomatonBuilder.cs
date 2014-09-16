@@ -40,12 +40,22 @@ namespace Lab2.Automaton
 
         public void SetStartState(int identifier)
         {
-            throw new NotImplementedException();
+            StateDescription start = automaton.FindByName(identifier.ToString());
+            if (start == null)
+            {
+                throw new ArgumentException();
+            }
+            start.IsStart = true;
         }
 
         public void SetFinhState(int identifier)
         {
-            throw new NotImplementedException();
+            StateDescription finish = automaton.FindByName(identifier.ToString());
+            if (finish == null)
+            {
+                throw new ArgumentException();
+            }
+            finish.IsFinish = true;
         }
 
         public IAutomaton GetAutomaton()
