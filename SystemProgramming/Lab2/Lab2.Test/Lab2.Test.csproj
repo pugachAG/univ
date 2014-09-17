@@ -68,6 +68,10 @@
     <Content Include="Assets\Automaton1Definition.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Assets\Automaton2Definition.txt" />
+    <Content Include="Assets\Automaton2Tests.txt" />
+    <Content Include="Assets\Automaton3Definition.txt" />
+    <Content Include="Assets\Automaton3Tests.txt" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
