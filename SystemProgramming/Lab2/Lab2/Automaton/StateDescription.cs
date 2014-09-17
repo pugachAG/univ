@@ -8,7 +8,7 @@ namespace Lab2.Automaton
 {
     public class StateDescription
     {
-        private List<Transition> transitions = new List<Transition>();
+        private Dictionary<SymbolBase, HashSet<StateDescription>> transitions = new Dictionary<SymbolBase, HashSet<StateDescription>>();
 
         public string Name { get; set; }
         public bool IsStart { get; set; }
@@ -23,17 +23,16 @@ namespace Lab2.Automaton
 
         public void AddNewTransition(SymbolBase label, StateDescription to)
         {
-            this.transitions.Add(new Transition(label, to));
+            if (!this.transitions.ContainsKey(label))
+                this.transitions[label] = new HashSet<StateDescription>();
+            this.transitions[label].Add(to);
         }
 
-        public StateDescription FindNextStateBySymbol(SymbolBase symbol)
+        public HashSet<StateDescription> FindNextStatesBySymbol(SymbolBase symbol)
         {
-            Transition labelTransition = transitions.FirstOrDefault(tr => tr.Label.Equals(symbol));
-            if (labelTransition != null)
-            {
-                return labelTransition.Tale;
-            }
-            return null;
+            if (this.transitions.ContainsKey(symbol))
+                return this.transitions[symbol];
+            return new HashSet<StateDescription>();
         }
     }
 }

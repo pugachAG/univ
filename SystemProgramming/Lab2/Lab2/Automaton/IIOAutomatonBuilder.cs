@@ -14,7 +14,7 @@ namespace Lab2.Automaton
 
         void SetStartState(int identifier);
 
-        void SetFinhState(int identifier);
+        void SetFinishState(int identifier);
 
         IAutomaton GetAutomaton();
     }

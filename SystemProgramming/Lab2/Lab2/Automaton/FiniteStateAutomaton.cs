@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Lab2.Automaton
 {
+
     public class FiniteStateAutomaton : IAutomaton
     {
         private List<StateDescription> states = new List<StateDescription>();
@@ -24,21 +25,23 @@ namespace Lab2.Automaton
 
         public bool CheckRecognizable(string word)
         {
-            StateDescription currentState = states.FirstOrDefault(st => st.IsStart);
-            if (currentState == null)
-            {
-                return false;
-            }
+            HashSet<StateDescription> currentStates = new HashSet<StateDescription>();
+            currentStates.Add(states.FirstOrDefault(st => st.IsStart));
+            if (currentStates == null)
+                throw new InvalidAutomatonStructureException("Start State Is Missing");
             foreach (char ch in word)
             {
-                StateDescription newState = currentState.FindNextStateBySymbol(new CharSybmol(ch));
-                if (newState == null)
-                {
-                    return false;
-                }
-                currentState = newState;
+                HashSet<StateDescription> newStates = new HashSet<StateDescription>();
+                foreach (StateDescription st in currentStates)
+                    newStates.UnionWith(st.FindNextStatesBySymbol(new CharSymbol(ch)));
+                currentStates = newStates;
             }
-            return currentState.IsFinish;
+            foreach (StateDescription st in currentStates)
+            {
+                if (st.IsFinish)
+                    return true;
+            }
+            return false;
         }
     }
 }

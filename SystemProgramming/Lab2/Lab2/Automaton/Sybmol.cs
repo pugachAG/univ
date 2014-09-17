@@ -10,11 +10,11 @@ namespace Lab2.Automaton
     {
     }
 
-    public class CharSybmol : SymbolBase
+    public class CharSymbol : SymbolBase
     {
         public char Value { get; set; }
 
-        public CharSybmol(char value)
+        public CharSymbol(char value)
         {
             this.Value = value;
         }
@@ -26,7 +26,7 @@ namespace Lab2.Automaton
 
         public override bool Equals(object obj)
         {
-            CharSybmol ch = obj as CharSybmol;
+            CharSymbol ch = obj as CharSymbol;
             if(ch != null)
                 return Value.Equals(ch.Value);
             return false;

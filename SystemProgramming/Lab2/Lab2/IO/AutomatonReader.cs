@@ -35,7 +35,7 @@ namespace Lab2.IO
             for (int i = 1; i < finishStatesDescription.Length; i++)
             {
                 tryAddState(finishStatesDescription[i]);
-                builder.SetFinhState(finishStatesDescription[i]);
+                builder.SetFinishState(finishStatesDescription[i]);
             }
 
             lineIndex++;

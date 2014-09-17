@@ -27,7 +27,10 @@ namespace Lab2.Test.Automaton
                 foreach (var pair in tests)
                 {
                     bool automatonResult = automaton.CheckRecognizable(pair.Key);
-                    Assert.IsTrue(automatonResult == pair.Value, "Automaton word recognition result should be the same as in predefined tests");
+                    if(automatonResult != pair.Value)
+                    {
+                        Assert.Fail("AutomatonRecognition Faild on test {0}, test string {1}", i + 1, pair.Key);
+                    }
                 }
             }
 

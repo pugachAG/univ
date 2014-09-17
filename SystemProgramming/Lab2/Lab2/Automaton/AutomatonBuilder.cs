@@ -29,7 +29,7 @@ namespace Lab2.Automaton
             
             if (label.HasValue)
             {
-                symbol = new CharSybmol(label.Value);
+                symbol = new CharSymbol(label.Value);
             }
             else
             {
@@ -48,7 +48,7 @@ namespace Lab2.Automaton
             start.IsStart = true;
         }
 
-        public void SetFinhState(int identifier)
+        public void SetFinishState(int identifier)
         {
             StateDescription finish = automaton.FindByName(identifier.ToString());
             if (finish == null)
