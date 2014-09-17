@@ -41,5 +41,19 @@ namespace Lab2.Automaton
 
     public class EpsilonSymbol : SymbolBase
     {
+        private static EpsilonSymbol instance = new EpsilonSymbol();
+        
+        public static EpsilonSymbol Instance
+        {
+            get
+            {
+                return instance;
+            }
+        }
+        
+        private EpsilonSymbol()
+        {
+        }
+        
     }
 }
