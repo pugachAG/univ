@@ -33,7 +33,7 @@ namespace Lab2.Automaton
             }
             else
             {
-                symbol = new EpsilonSymbol();
+                symbol = EpsilonSymbol.Instance;
             }
             head.AddNewTransition(symbol, tale);
         }
