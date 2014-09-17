@@ -24,7 +24,21 @@ namespace Lab2.Automaton
 
         public bool CheckRecognizable(string word)
         {
-            throw new NotImplementedException();
+            StateDescription currentState = states.FirstOrDefault(st => st.IsStart);
+            if (currentState == null)
+            {
+                return false;
+            }
+            foreach (char ch in word)
+            {
+                StateDescription newState = currentState.FindNextStateBySymbol(new CharSybmol(ch));
+                if (newState == null)
+                {
+                    return false;
+                }
+                currentState = newState;
+            }
+            return currentState.IsFinish;
         }
     }
 }

@@ -18,6 +18,25 @@ namespace Lab2.Automaton
         {
             this.Value = value;
         }
+
+        public override int GetHashCode()
+        {
+            return Value.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            CharSybmol ch = obj as CharSybmol;
+            if(ch != null)
+                return Value.Equals(ch.Value);
+            return false;
+        }
+
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
+
     }
 
     public class EpsilonSymbol : SymbolBase
