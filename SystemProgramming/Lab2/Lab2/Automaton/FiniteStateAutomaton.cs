@@ -26,9 +26,10 @@ namespace Lab2.Automaton
         public bool CheckRecognizable(string word)
         {
             HashSet<StateDescription> currentStates = new HashSet<StateDescription>();
-            currentStates.Add(states.FirstOrDefault(st => st.IsStart));
-            if (currentStates == null)
+            StateDescription start = states.FirstOrDefault(st => st.IsStart);
+            if (start == null)
                 throw new InvalidAutomatonStructureException("Start State Is Missing");
+            currentStates.UnionWith(start.StateClosure());
             foreach (char ch in word)
             {
                 HashSet<StateDescription> newStates = new HashSet<StateDescription>();

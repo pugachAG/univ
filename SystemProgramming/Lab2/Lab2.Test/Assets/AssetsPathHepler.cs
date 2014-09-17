@@ -12,7 +12,7 @@ namespace Lab2.Test.Assets
         const string AssetsTestsSuffix = "Tests";
         const string AssetsDefinitionsSuffix = "Definition";
         const string AssetsAutomatonTestsPrefix = "Automaton";
-        const int AssetsAutomatonTestsCount = 2;
+        const int AssetsAutomatonTestsCount = 3;
 
         public static string[] GetAssetsAutomatonTestsPaths()
         {

@@ -30,9 +30,35 @@ namespace Lab2.Automaton
 
         public HashSet<StateDescription> FindNextStatesBySymbol(SymbolBase symbol)
         {
+            HashSet<StateDescription> res = new HashSet<StateDescription>();
             if (this.transitions.ContainsKey(symbol))
-                return this.transitions[symbol];
-            return new HashSet<StateDescription>();
+            {
+                foreach (StateDescription st in this.transitions[symbol])
+                    res.UnionWith(st.StateClosure());
+
+            }
+            return res;
+        }
+
+        public HashSet<StateDescription> StateClosure()
+        {
+            HashSet<StateDescription> stateClosure = new HashSet<StateDescription>();
+            HashSet<StateDescription> currentLevelStates = new HashSet<StateDescription>();
+            currentLevelStates.Add(this);
+
+            while (currentLevelStates.Count != 0)
+            {
+                stateClosure.UnionWith(currentLevelStates);
+                HashSet<StateDescription> newStates = new HashSet<StateDescription>();
+                foreach (StateDescription st in currentLevelStates)
+                {
+                    if (st.transitions.ContainsKey(EpsilonSymbol.Instance))
+                        newStates.UnionWith(st.transitions[EpsilonSymbol.Instance]);
+                }
+                newStates.ExceptWith(stateClosure);
+                currentLevelStates = newStates;
+            }
+            return stateClosure;
         }
     }
 }
