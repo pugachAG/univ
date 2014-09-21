@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPMControls.Drawing;
 
 namespace WPMControlTest
 {
@@ -23,7 +25,15 @@ namespace WPMControlTest
         public MainWindow()
         {
             InitializeComponent();
-            
+            IFunction f1 = new Func<double, double>(x => x * x).ToIFunction();
+            IFunction f2 = new Func<double, double>(x => Math.Sin(x)).ToIFunction();
+            Random rand = new Random();
+            IFunction f3 = new Func<double, double>(x => rand.NextDouble() + x).ToIFunction();
+            ObservableCollection<IFunction> funcs = new ObservableCollection<IFunction>();
+            funcs.Add(f1);
+            this.canvas.Functions = funcs;
+            funcs.Add(f2);
+            funcs.Add(f3);
         }
     }
 }

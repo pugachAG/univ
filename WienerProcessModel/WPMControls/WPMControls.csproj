@@ -47,6 +47,8 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Drawing\IFunction.cs" />
+    <Compile Include="Drawing\IFunctionExtensions.cs" />
     <Compile Include="Drawing\PlotGrid.cs" />
     <Compile Include="Drawing\PlotDrawer.cs" />
     <Compile Include="Drawing\VisualHost.cs" />

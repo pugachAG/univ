@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +15,16 @@ namespace WPMControls.Drawing
     {
         #region Dependency Properties
 
+        public IEnumerable Functions
+        {
+            get { return (IEnumerable)GetValue(FunctionsProperty); }
+            set { SetValue(FunctionsProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for Functions.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty FunctionsProperty =
+            DependencyProperty.Register("Functions", typeof(IEnumerable), typeof(PlotDrawer), new PropertyMetadata(null, FunctionsPropertyChanged));
+        
         public double MinimumX
         {
             get { return (double)GetValue(MinimumXProperty); }
@@ -111,11 +124,18 @@ namespace WPMControls.Drawing
             gridDrawing.ParentWidth = ActualWidth;
             gridDrawing.ParentHeight = ActualHeight;
             gridDrawing.GridBackround = GridBackround;
+            gridDrawing.Functions = Functions;
         }
 
         private void OnGridPropertyChanged()
         {
             GridPropertiesChanged(this, new DependencyPropertyChangedEventArgs(MinimumXProperty, 0, 0));
+        }
+
+        private void OnFunctionsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            //just redraw all
+            OnGridPropertyChanged();
         }
 
         #endregion
@@ -131,6 +151,20 @@ namespace WPMControls.Drawing
                 sender.AddChild(drawing);
             else
                 sender.SetChild(drawing, 0);
+        }
+
+        private static void FunctionsPropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            PlotDrawer sender = (PlotDrawer)d;
+            if (e.OldValue is INotifyCollectionChanged)
+            {
+                ((INotifyCollectionChanged)e.OldValue).CollectionChanged -= sender.OnFunctionsCollectionChanged;
+            }
+            if (e.NewValue is INotifyCollectionChanged)
+            {
+                ((INotifyCollectionChanged)e.NewValue).CollectionChanged -= sender.OnFunctionsCollectionChanged;
+            }
+            GridPropertiesChanged(d, e);
         }
 
         #endregion

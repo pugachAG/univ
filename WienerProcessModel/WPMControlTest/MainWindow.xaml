@@ -10,6 +10,10 @@
                 VerticalAlignment="Stretch"
                 Background="Black"
                 GridBackround="AntiqueWhite"
+                MinimumX="0"
+                MaximumX="10"
+                MinimumY="0"
+                MaximumY="10"
                 x:Name="canvas" >
 
             </ctrs:PlotDrawer>
