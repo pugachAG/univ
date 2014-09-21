@@ -3,22 +3,29 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:ctrs="clr-namespace:WPMControls.Drawing;assembly=WPMControls"
         Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        <Border x:Name="border" BorderBrush="Black" BorderThickness="2">
-            <ctrs:PlotDrawer
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch"
-                Background="Black"
-                GridBackround="AntiqueWhite"
-                MinimumX="0"
-                MaximumX="10"
-                MinimumY="0"
-                MaximumY="10"
-                x:Name="canvas" >
+    <DockPanel LastChildFill="True">
+        
+        <Slider 
+            x:Name="xSlider"
+            Minimum="3"
+            Maximum="100"
+            DockPanel.Dock="Top" />
+        
+        <ctrs:PlotDrawer
+            DockPanel.Dock="Bottom"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Background="Black"
+            GridBackround="AntiqueWhite"
+            MinimumX="-3"
+            MaximumX="{Binding ElementName=xSlider, Path=Value}"
+            MinimumY="0"
+            MaximumY="{Binding ElementName=xSlider, Path=Value}"
+            x:Name="canvas" >
 
-            </ctrs:PlotDrawer>
+        </ctrs:PlotDrawer>
 
-        </Border>
+        
 
-    </Grid>
+    </DockPanel>
 </Window>

@@ -14,7 +14,7 @@ namespace WPMControls.Drawing
         /// <summary>
         /// Number of points on the plot
         /// </summary>
-        private const double PointsCount = 1000;
+        private const double PointsCount = 500;
         /// <summary>
         /// for floating point numbers issues
         /// </summary>
@@ -81,17 +81,12 @@ namespace WPMControls.Drawing
             for (double x = MinX; x < UpperBound(MaxX); x += dx)
             {
                 double y = function.GetValue(x);
-                if (IsPointInside(x, y))
+                Point currentPoint = ConvertForDrawing(x, y);
+                if (previousPoint.HasValue)
                 {
-                    Point currentPoint = ConvertForDrawing(x, y);
-                    if (previousPoint.HasValue)
-                    {
-                        context.DrawLine(pen, previousPoint.Value, currentPoint);
-                    }
-                    previousPoint = currentPoint;
+                    context.DrawLine(pen, previousPoint.Value, currentPoint);
                 }
-                else
-                    previousPoint = null;
+                previousPoint = currentPoint;
             }
         }
 
@@ -128,7 +123,12 @@ namespace WPMControls.Drawing
             double multerX = GridWidth / (MaxX - MinX);
             double multerY = GridHeight / (MaxY - MinY);
 
-            return new Point(multerX * x + GridMarginLeft, ParentHeight - (multerY * y + GridMarginBottom));
+            Func<double, double, double, double> fixValue = (mn, mx, val) => Math.Max(Math.Min(mx, val), mn);
+
+            double xFixed = fixValue(MinX, MaxX, x);
+            double yFixed = fixValue(MinY, MaxY, y);
+
+            return new Point(multerX * (xFixed - MinX) + GridMarginLeft, ParentHeight - (multerY * (yFixed - MinY) + GridMarginBottom));
         }
 
         private double UpperBound(double val)

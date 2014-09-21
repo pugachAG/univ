@@ -26,14 +26,14 @@ namespace WPMControlTest
         {
             InitializeComponent();
             IFunction f1 = new Func<double, double>(x => x * x).ToIFunction();
-            IFunction f2 = new Func<double, double>(x => Math.Sin(x)).ToIFunction();
+            IFunction f2 = new Func<double, double>(x => x * Math.Sin(x)).ToIFunction();
             Random rand = new Random();
             IFunction f3 = new Func<double, double>(x => rand.NextDouble() + x).ToIFunction();
             ObservableCollection<IFunction> funcs = new ObservableCollection<IFunction>();
             funcs.Add(f1);
             this.canvas.Functions = funcs;
             funcs.Add(f2);
-            funcs.Add(f3);
+            //funcs.Add(f3);
         }
     }
 }
