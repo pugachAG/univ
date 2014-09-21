@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,13 @@ using System.Windows.Media;
 
 namespace WPMControls.Drawing
 {
+    enum TextAssignmentLocation
+    {
+        Left,
+        Bottom,
+        BottomLeft
+    }
+
     class PlotGrid
     {
         /// <summary>
@@ -21,6 +29,17 @@ namespace WPMControls.Drawing
         private const double Epsilon = 0.00001;
         private const double PenThickness = 2;
         private const int PenChacheSize = 100;
+
+        private const double MaximumFontSize = 20;
+        private const string FontTestText = "123456.99";
+        private const double DefaultFontSize = 10;
+        /// <summary>
+        /// DefaultFontSize * FontCoefficient -> drawing with size 1x1;
+        /// </summary>
+        private static readonly double FontHeightCoefficient;
+        private static readonly double FontWidhtCoefficient;
+        private const string TypefaceName = "Verdana";
+        private static readonly Brush DefaultTextBrush = Brushes.Black;
 
         private const double MarginMulterLeft = 0.1;
         private const double MarginMulterRight = 0.05;
@@ -39,6 +58,19 @@ namespace WPMControls.Drawing
         private Brush[] penBrushes = new Brush[5] { Brushes.Red, Brushes.Blue, Brushes.Green, Brushes.Orange, Brushes.Brown };
         private int penLastBrushIndex = 0;
         private Queue<Tuple<IFunction, int>> penChache = new Queue<Tuple<IFunction, int>>();
+
+        static PlotGrid()
+        {
+            FormattedText ftext = new FormattedText(
+                FontTestText,
+                CultureInfo.InstalledUICulture,
+                FlowDirection.LeftToRight,
+                new Typeface(TypefaceName),
+                DefaultFontSize,
+                DefaultTextBrush);
+            FontWidhtCoefficient = 1.0 / ftext.Width;
+            FontHeightCoefficient = 1.0 / ftext.Height;
+        }
 
         public PlotGrid()
         {
@@ -61,7 +93,7 @@ namespace WPMControls.Drawing
             DrawingVisual result = new DrawingVisual();
             DrawingContext context = result.RenderOpen();
 
-            context.DrawRectangle(GridBackround, null, new Rect(GridMarginLeft, GridMarginTop, GridWidth, GridHeight));
+            DoDrawGrid(context);
 
             if (Functions != null)
                 foreach (var function in Functions)
@@ -70,6 +102,54 @@ namespace WPMControls.Drawing
 
             context.Close();
             return result;
+        }
+
+        public Point ConvertToGridCoordinates(Point p)
+        {
+            double multerX = (MaxX - MinX) / GridWidth;
+            double multerY = (MaxY - MinY) / GridHeight;
+            double x = (p.X - GridMarginLeft) * multerX + MinX;
+            double y = (ParentHeight - p.Y - GridMarginBottom) * multerY + MinY;
+            return new Point(x, y);
+        }
+
+        private void DoDrawGrid(DrawingContext context)
+        {
+            context.DrawRectangle(GridBackround, null, new Rect(GridMarginLeft, GridMarginTop, GridWidth, GridHeight));
+
+            DrawText(context, string.Format("({0},{1})", MinX, MinY), MinX, MinY, TextAssignmentLocation.BottomLeft);
+        }
+
+        private double GetFontSize()
+        {
+            double fontSize = DefaultFontSize * Math.Min(FontWidhtCoefficient * GridMarginLeft, FontHeightCoefficient * GridMarginBottom);
+            return Math.Min(fontSize, MaximumFontSize);
+        }
+
+        private void DrawText(DrawingContext context, string text, double x, double y, TextAssignmentLocation location)
+        {
+            Point p = ConvertForDrawing(x, y);
+            double fontSize = GetFontSize();
+            if (fontSize > 0)
+            {
+                FormattedText ftext = new FormattedText(
+                    text,
+                    CultureInfo.InstalledUICulture,
+                    FlowDirection.LeftToRight,
+                    new Typeface(TypefaceName),
+                    fontSize,
+                    DefaultTextBrush);
+
+                Point origin = new Point();
+                switch (location)
+                {
+                    case TextAssignmentLocation.BottomLeft:
+                        origin = new Point(p.X - ftext.Width, p.Y);
+                        break;
+                }
+                
+                context.DrawText(ftext, origin);
+            }
         }
 
         private void DrawSingleFunctionPlot(DrawingContext context, IFunction function)

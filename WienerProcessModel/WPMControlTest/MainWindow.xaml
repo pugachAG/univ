@@ -5,17 +5,28 @@
         Title="MainWindow" Height="350" Width="525">
     <DockPanel LastChildFill="True">
         
-        <Slider 
+        <StackPanel 
+            DockPanel.Dock="Top"
+            Orientation="Horizontal">
+        
+        <Slider
+            Width="200"
             x:Name="xSlider"
             Minimum="3"
             Maximum="100"
-            DockPanel.Dock="Top" />
+             />
         
+        <TextBlock
+            Text="{Binding ElementName=canvas, Path=CurrentMousePosition}"
+            />
+            
+        </StackPanel>
+
         <ctrs:PlotDrawer
             DockPanel.Dock="Bottom"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            Background="Black"
+            Background="White"
             GridBackround="AntiqueWhite"
             MinimumX="-3"
             MaximumX="{Binding ElementName=xSlider, Path=Value}"

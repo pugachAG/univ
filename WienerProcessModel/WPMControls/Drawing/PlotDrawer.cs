@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace WPMControls.Drawing
@@ -25,6 +26,18 @@ namespace WPMControls.Drawing
         public static readonly DependencyProperty FunctionsProperty =
             DependencyProperty.Register("Functions", typeof(IEnumerable), typeof(PlotDrawer), new PropertyMetadata(null, FunctionsPropertyChanged));
         
+
+        public Point CurrentMousePosition
+        {
+            get { return (Point)GetValue(CurrentMousePositionProperty); }
+            set { SetValue(CurrentMousePositionProperty, value); }
+        }
+
+        // Using a DependencyProperty as the backing store for CurrentMousePosition.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty CurrentMousePositionProperty =
+            DependencyProperty.Register("CurrentMousePosition", typeof(Point), typeof(PlotDrawer), new PropertyMetadata(new Point()));
+                
+
         public double MinimumX
         {
             get { return (double)GetValue(MinimumXProperty); }
@@ -109,6 +122,7 @@ namespace WPMControls.Drawing
         {
             this.Loaded += (o, e) => OnGridPropertyChanged();
             this.SizeChanged += (o, e) => OnGridPropertyChanged();
+            this.MouseMove += (o, e) => OnMouseMove();
         }
 
         #endregion
@@ -136,6 +150,12 @@ namespace WPMControls.Drawing
         {
             //just redraw all
             OnGridPropertyChanged();
+        }
+
+        private void OnMouseMove()
+        {
+            Point p = Mouse.GetPosition(this);
+            this.CurrentMousePosition = gridDrawing.ConvertToGridCoordinates(p);
         }
 
         #endregion
