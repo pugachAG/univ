@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Shapes;
 
 namespace WPMControls.Drawing
 {
@@ -17,7 +18,7 @@ namespace WPMControls.Drawing
         BottomLeft
     }
 
-    class PlotGrid
+    class PlotDrawingHandler
     {
         /// <summary>
         /// for floating point numbers issues
@@ -36,6 +37,7 @@ namespace WPMControls.Drawing
         private static readonly double FontWidhtCoefficient;
         private const string TypefaceName = "Verdana";
         private static readonly Brush DefaultTextBrush = Brushes.Black;
+        private const int StripsCount = 10;
 
         private const double MarginMulterLeft = 0.1;
         private const double MarginMulterRight = 0.05;
@@ -60,7 +62,8 @@ namespace WPMControls.Drawing
         private int penLastBrushIndex = 0;
         private Queue<Tuple<IFunction, int>> penChache = new Queue<Tuple<IFunction, int>>();
 
-        static PlotGrid()
+
+        static PlotDrawingHandler()
         {
             FormattedText ftext = new FormattedText(
                 FontTestText,
@@ -73,13 +76,13 @@ namespace WPMControls.Drawing
             FontHeightCoefficient = 1.0 / ftext.Height;
         }
 
-        public PlotGrid()
+        public PlotDrawingHandler()
         {
             this.GridBackround = Brushes.Transparent;
             this.PointsCount = 500;
         }
 
-        public PlotGrid(double parentWidth, double parentHeight, double minX, double maxX, double minY, double maxY, Brush gridBackround)
+        public PlotDrawingHandler(double parentWidth, double parentHeight, double minX, double maxX, double minY, double maxY, Brush gridBackround)
         {
             this.ParentWidth = parentWidth;
             this.ParentHeight = parentHeight;
@@ -90,12 +93,12 @@ namespace WPMControls.Drawing
             this.GridBackround = gridBackround;
         }
 
-        public virtual DrawingVisual DrawGrid()
+        public virtual DrawingVisual Draw()
         {
             DrawingVisual result = new DrawingVisual();
             DrawingContext context = result.RenderOpen();
 
-            DoDrawGrid(context);
+            DrawGrid(context);
 
             if (Functions != null)
                 foreach (var function in Functions)
@@ -115,15 +118,21 @@ namespace WPMControls.Drawing
             return new Point(x, y);
         }
 
-        private void DoDrawGrid(DrawingContext context)
+        private void DrawGrid(DrawingContext context)
         {
             context.DrawRectangle(GridBackround, null, new Rect(GridMarginLeft, GridMarginTop, GridWidth, GridHeight));
-
-            DrawText(context, string.Format("({0},{1})", MinX, MinY), MinX, MinY, TextAssignmentLocation.BottomLeft);
+            DoDrawStrips(context);
         }
+
+        private void DoDrawStrips(DrawingContext context)
+        {
+            DrawText(context, StringFormatHelper.FormatPoint(new Point(MinX, MinY)), MinX, MinY, TextAssignmentLocation.BottomLeft);
+        }
+
 
         private double GetFontSize()
         {
+            return DefaultFontSize;
             double fontSize = DefaultFontSize * Math.Min(FontWidhtCoefficient * GridMarginLeft, FontHeightCoefficient * GridMarginBottom);
             return Math.Min(fontSize, MaximumFontSize);
         }
@@ -143,14 +152,28 @@ namespace WPMControls.Drawing
                     DefaultTextBrush);
 
                 Point origin = new Point();
+                bool isDraw = true;
+
+                if (location == TextAssignmentLocation.Left || location == TextAssignmentLocation.BottomLeft)
+                    isDraw &= ftext.Width < GridMarginLeft;
+                if (location == TextAssignmentLocation.Bottom || location == TextAssignmentLocation.BottomLeft)
+                    isDraw &= ftext.Height < GridMarginBottom;
+
                 switch (location)
                 {
                     case TextAssignmentLocation.BottomLeft:
                         origin = new Point(p.X - ftext.Width, p.Y);
                         break;
+                    case TextAssignmentLocation.Left:
+                        origin = new Point(p.X - ftext.Width, p.Y - ftext.Height / 2);
+                        break;
+                    case TextAssignmentLocation.Bottom:
+                        origin = new Point(p.X - ftext.Width / 2, p.Y);
+                        break;
                 }
                 
-                context.DrawText(ftext, origin);
+                if(isDraw)
+                    context.DrawText(ftext, origin);
             }
         }
 

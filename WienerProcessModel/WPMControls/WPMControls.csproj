@@ -52,8 +52,9 @@
     <Compile Include="Drawing\PlotControl.xaml.cs">
       <DependentUpon>PlotControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Drawing\PlotGrid.cs" />
+    <Compile Include="Drawing\PlotDrawingHandler.cs" />
     <Compile Include="Drawing\PlotDrawer.cs" />
+    <Compile Include="Drawing\StringFormatHelper.cs" />
     <Compile Include="Drawing\VisualHost.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

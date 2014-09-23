@@ -133,7 +133,7 @@ namespace WPMControls.Drawing
 
         #region Members
 
-        private PlotGrid gridDrawing = new PlotGrid();
+        private PlotDrawingHandler gridDrawing = new PlotDrawingHandler();
 
         #endregion
 
@@ -193,7 +193,7 @@ namespace WPMControls.Drawing
         {
             PlotDrawer sender = (PlotDrawer)d;
             sender.UpdateGridDrawingProperties();
-            DrawingVisual drawing = sender.gridDrawing.DrawGrid();
+            DrawingVisual drawing = sender.gridDrawing.Draw();
             if (sender.ChildrenCount == 0)
                 sender.AddChild(drawing);
             else
