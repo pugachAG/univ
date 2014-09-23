@@ -14,6 +14,9 @@
         <Style TargetType="TextBox">
             <Setter Property="Margin" Value="2" />
         </Style>
+        <Style TargetType="Slider">
+            <Setter Property="Margin" Value="2" />
+        </Style>
     </UserControl.Resources>
     
     <Grid>
@@ -21,30 +24,85 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
+
+        <StackPanel>
+            <Grid
+                Margin="2,10,2,10"
+                Grid.Column="0">
+            
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="40" />
+                </Grid.ColumnDefinitions>
+            
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
         
-        <StackPanel
-            Grid.Column="0">
-        
-            <Label
-                Content="Minimum X:" />
-            <TextBox 
-                Text="{Binding ElementName=plotDrawer, Path=MinimumX, Mode=TwoWay}"/>
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Content="Minimum X:" />
+                <TextBox
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Text="{Binding ElementName=plotDrawer, Path=MinimumX, Mode=TwoWay}"/>
 
-            <Label
-                Content="Maximum X:" />
-            <TextBox 
-                Text="{Binding ElementName=plotDrawer, Path=MaximumX, Mode=TwoWay}"/>
+                <Label
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Content="Maximum X:" />
+                <TextBox
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Text="{Binding ElementName=plotDrawer, Path=MaximumX, Mode=TwoWay}"/>
 
-            <Label
-                Content="Minimum Y:" />
-            <TextBox 
-                Text="{Binding ElementName=plotDrawer, Path=MinimumY, Mode=TwoWay}"/>
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Content="Minimum Y:" />
+                <TextBox 
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Text="{Binding ElementName=plotDrawer, Path=MinimumY, Mode=TwoWay}"/>
 
-            <Label
-                Content="Maximum Y:" />
-            <TextBox 
-                Text="{Binding ElementName=plotDrawer, Path=MaximumY, Mode=TwoWay}"/>
+                <Label
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Content="Maximum Y:" />
+                <TextBox 
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Text="{Binding ElementName=plotDrawer, Path=MaximumY, Mode=TwoWay}"/>
 
+
+
+
+
+
+
+                <Label
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Content="Precision:" />
+                <TextBlock
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    VerticalAlignment="Center"
+                    Text="{Binding ElementName=plotDrawer, Path=Precision}"/>
+
+            </Grid>
+            
+            <Slider
+                Value="{Binding ElementName=plotDrawer, Path=Precision, Mode=TwoWay}"
+                Minimum="100"
+                Maximum="2000" />
+            
+                
         </StackPanel>
 
         <local:PlotDrawer

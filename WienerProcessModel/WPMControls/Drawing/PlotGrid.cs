@@ -20,10 +20,6 @@ namespace WPMControls.Drawing
     class PlotGrid
     {
         /// <summary>
-        /// Number of points on the plot
-        /// </summary>
-        private const double PointsCount = 500;
-        /// <summary>
         /// for floating point numbers issues
         /// </summary>
         private const double Epsilon = 0.00001;
@@ -55,6 +51,11 @@ namespace WPMControls.Drawing
         public Brush GridBackround { get; set; }
         public IEnumerable Functions { get; set; }
 
+        /// <summary>
+        /// Number of points on the plot
+        /// </summary>
+        public int PointsCount { get; set; }
+
         private Brush[] penBrushes = new Brush[5] { Brushes.Red, Brushes.Blue, Brushes.Green, Brushes.Orange, Brushes.Brown };
         private int penLastBrushIndex = 0;
         private Queue<Tuple<IFunction, int>> penChache = new Queue<Tuple<IFunction, int>>();
@@ -75,6 +76,7 @@ namespace WPMControls.Drawing
         public PlotGrid()
         {
             this.GridBackround = Brushes.Transparent;
+            this.PointsCount = 500;
         }
 
         public PlotGrid(double parentWidth, double parentHeight, double minX, double maxX, double minY, double maxY, Brush gridBackround)

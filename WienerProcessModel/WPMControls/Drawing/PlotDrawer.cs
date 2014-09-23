@@ -32,7 +32,6 @@ namespace WPMControls.Drawing
             get { return (Point)GetValue(CurrentMousePositionProperty); }
             set 
             {
-                OnFunctionsPropertyChanged(value);
                 SetValue(CurrentMousePositionProperty, value);
             }
         }
@@ -112,6 +111,24 @@ namespace WPMControls.Drawing
         public static readonly DependencyProperty GridBackroundProperty =
             DependencyProperty.Register("GridBackround", typeof(Brush), typeof(PlotDrawer), new PropertyMetadata(null, GridPropertiesChanged));
 
+
+
+        public int Precision
+        {
+            get { return (int)GetValue(PrecisionProperty); }
+            set 
+            {
+                SetValue(PrecisionProperty, value);
+                UpdateGridDrawingProperties();
+            }
+        }
+
+        // Using a DependencyProperty as the backing store for Precision.  This enables animation, styling, binding, etc...
+        public static readonly DependencyProperty PrecisionProperty =
+            DependencyProperty.Register("Precision", typeof(int), typeof(PlotDrawer), new PropertyMetadata(1000, GridPropertiesChanged));
+
+        
+
         #endregion
 
         #region Members
@@ -143,6 +160,7 @@ namespace WPMControls.Drawing
             gridDrawing.ParentHeight = ActualHeight;
             gridDrawing.GridBackround = GridBackround;
             gridDrawing.Functions = Functions;
+            gridDrawing.PointsCount = Precision;
         }
 
         private void OnGridPropertyChanged()

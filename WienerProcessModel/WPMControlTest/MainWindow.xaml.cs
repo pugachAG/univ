@@ -32,8 +32,8 @@ namespace WPMControlTest
             ObservableCollection<IFunction> funcs = new ObservableCollection<IFunction>();
             funcs.Add(f1);
             this.canvas.Functions = funcs;
-            //funcs.Add(f2);
-            //funcs.Add(f3);
+            funcs.Add(f2);
+            funcs.Add(f3);
         }
     }
 }

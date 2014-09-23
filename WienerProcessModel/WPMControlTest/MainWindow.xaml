@@ -10,7 +10,8 @@
             DockPanel.Dock="Bottom"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
-            Background="White"
+            Background="Azure"
+            PlotBackground="Beige"
             GridBackround="AntiqueWhite"
             x:Name="canvas" >
 
