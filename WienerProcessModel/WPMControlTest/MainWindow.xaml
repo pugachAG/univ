@@ -4,37 +4,17 @@
         xmlns:ctrs="clr-namespace:WPMControls.Drawing;assembly=WPMControls"
         Title="MainWindow" Height="350" Width="525">
     <DockPanel LastChildFill="True">
-        
-        <StackPanel 
-            DockPanel.Dock="Top"
-            Orientation="Horizontal">
-        
-        <Slider
-            Width="200"
-            x:Name="xSlider"
-            Minimum="3"
-            Maximum="100"
-             />
-        
-        <TextBlock
-            Text="{Binding ElementName=canvas, Path=CurrentMousePosition}"
-            />
-            
-        </StackPanel>
 
-        <ctrs:PlotDrawer
+
+        <ctrs:PlotControl
             DockPanel.Dock="Bottom"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"
             Background="White"
             GridBackround="AntiqueWhite"
-            MinimumX="-3"
-            MaximumX="{Binding ElementName=xSlider, Path=Value}"
-            MinimumY="0"
-            MaximumY="{Binding ElementName=xSlider, Path=Value}"
             x:Name="canvas" >
 
-        </ctrs:PlotDrawer>
+        </ctrs:PlotControl>
 
         
 

@@ -49,6 +49,9 @@
   <ItemGroup>
     <Compile Include="Drawing\IFunction.cs" />
     <Compile Include="Drawing\IFunctionExtensions.cs" />
+    <Compile Include="Drawing\PlotControl.xaml.cs">
+      <DependentUpon>PlotControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Drawing\PlotGrid.cs" />
     <Compile Include="Drawing\PlotDrawer.cs" />
     <Compile Include="Drawing\VisualHost.cs" />
@@ -75,7 +78,12 @@
     </None>
     <AppDesigner Include="Properties\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Page Include="Drawing\PlotControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

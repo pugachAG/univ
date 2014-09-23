@@ -155,6 +155,9 @@ namespace WPMControls.Drawing
         private void DrawSingleFunctionPlot(DrawingContext context, IFunction function)
         {
             double dx = (MaxX - MinX) / (PointsCount - 1);
+            if(dx < UpperBound(0))
+                return;
+
             Point? previousPoint = null;
             Pen pen = GetPen(function);
 
@@ -162,12 +165,21 @@ namespace WPMControls.Drawing
             {
                 double y = function.GetValue(x);
                 Point currentPoint = ConvertForDrawing(x, y);
-                if (previousPoint.HasValue)
+                if (previousPoint.HasValue && !IsLineOut(previousPoint.Value, currentPoint))
                 {
                     context.DrawLine(pen, previousPoint.Value, currentPoint);
                 }
                 previousPoint = currentPoint;
             }
+        }
+
+        private bool IsLineOut(Point point0, Point point1)
+        {
+            double drawingMinY = ConvertForDrawing(0, MaxY).Y;
+            double drawingMaxY = ConvertForDrawing(0, MinY).Y;
+            bool isUpper = point0.Y > LowerBound(drawingMaxY) && point1.Y > LowerBound(drawingMaxY);
+            bool isLower = point0.Y < UpperBound(drawingMinY) && point1.Y < UpperBound(drawingMinY);
+            return isLower || isUpper;
         }
 
         private Pen GetPen(IFunction func)

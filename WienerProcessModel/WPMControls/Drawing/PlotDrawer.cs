@@ -30,7 +30,11 @@ namespace WPMControls.Drawing
         public Point CurrentMousePosition
         {
             get { return (Point)GetValue(CurrentMousePositionProperty); }
-            set { SetValue(CurrentMousePositionProperty, value); }
+            set 
+            {
+                OnFunctionsPropertyChanged(value);
+                SetValue(CurrentMousePositionProperty, value);
+            }
         }
 
         // Using a DependencyProperty as the backing store for CurrentMousePosition.  This enables animation, styling, binding, etc...
@@ -50,7 +54,7 @@ namespace WPMControls.Drawing
 
         // Using a DependencyProperty as the backing store for MinimumX.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MinimumXProperty =
-            DependencyProperty.Register("MinimumX", typeof(double), typeof(PlotDrawer), new PropertyMetadata(default(double), GridPropertiesChanged));
+            DependencyProperty.Register("MinimumX", typeof(double), typeof(PlotDrawer), new PropertyMetadata(0.0, GridPropertiesChanged));
 
         public double MaximumX
         {
@@ -64,7 +68,7 @@ namespace WPMControls.Drawing
 
         // Using a DependencyProperty as the backing store for MaximumX.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MaximumXProperty =
-            DependencyProperty.Register("MaximumX", typeof(double), typeof(PlotDrawer), new PropertyMetadata(default(double), GridPropertiesChanged));
+            DependencyProperty.Register("MaximumX", typeof(double), typeof(PlotDrawer), new PropertyMetadata(1.0, GridPropertiesChanged));
 
         public double MinimumY
         {
@@ -78,7 +82,7 @@ namespace WPMControls.Drawing
 
         // Using a DependencyProperty as the backing store for MinimumY.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MinimumYProperty =
-            DependencyProperty.Register("MinimumY", typeof(double), typeof(PlotDrawer), new PropertyMetadata(default(double), GridPropertiesChanged));
+            DependencyProperty.Register("MinimumY", typeof(double), typeof(PlotDrawer), new PropertyMetadata(0.0, GridPropertiesChanged));
 
         public double MaximumY
         {
@@ -92,7 +96,7 @@ namespace WPMControls.Drawing
 
         // Using a DependencyProperty as the backing store for MaximumY.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty MaximumYProperty =
-            DependencyProperty.Register("MaximumY", typeof(double), typeof(PlotDrawer), new PropertyMetadata(default(double), GridPropertiesChanged));
+            DependencyProperty.Register("MaximumY", typeof(double), typeof(PlotDrawer), new PropertyMetadata(1.0, GridPropertiesChanged));
 
         public Brush GridBackround
         {
@@ -144,6 +148,11 @@ namespace WPMControls.Drawing
         private void OnGridPropertyChanged()
         {
             GridPropertiesChanged(this, new DependencyPropertyChangedEventArgs(MinimumXProperty, 0, 0));
+        }
+
+        private void OnFunctionsPropertyChanged(object newValue)
+        {
+            FunctionsPropertyChanged(this, new DependencyPropertyChangedEventArgs(FunctionsProperty, Functions, newValue));
         }
 
         private void OnFunctionsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
