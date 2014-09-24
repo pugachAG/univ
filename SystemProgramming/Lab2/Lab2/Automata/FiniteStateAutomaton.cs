@@ -10,24 +10,39 @@ namespace Lab2.Automata
 
     public class FiniteStateAutomaton : IAutomaton
     {
-        private List<StateDescription> states = new List<StateDescription>();
+        private List<StateDescription> stateDescriptions = new List<StateDescription>();
 
         public void AddNewState(StateDescription newState)
         {
             if (newState == null)
                 throw new ArgumentNullException();
-            states.Add(newState);
+            stateDescriptions.Add(newState);
+        }
+
+        public List<StateDescription> GetAllStates()
+        {
+            return stateDescriptions;
         }
         
         public StateDescription FindByName(string name)
         {
-            return states.FirstOrDefault(st => st.Name == name);
+            return stateDescriptions.FirstOrDefault(st => st.Name == name);
+        }
+
+        public StateDescription GetStart()
+        {
+            return stateDescriptions.FirstOrDefault(st => st.IsStart == true);
+        }
+
+        public List<StateDescription> GetFinishes()
+        {
+            return stateDescriptions.FindAll(st => st.IsFinish == true);
         }
 
         public bool CheckRecognizable(string word)
         {
             HashSet<StateDescription> currentStates = new HashSet<StateDescription>();
-            StateDescription start = states.FirstOrDefault(st => st.IsStart);
+            StateDescription start = stateDescriptions.FirstOrDefault(st => st.IsStart);
             if (start == null)
                 throw new InvalidAutomatonStructureException("Start State Is Missing");
             currentStates.UnionWith(start.StateClosure());

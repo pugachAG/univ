@@ -11,18 +11,17 @@ namespace Lab2.RegularExpressions
 {
     public abstract class RegularExpression
     {
-        public abstract bool IsMatch(string str);
+        public bool IsMatch(string str)
+        {
+            return false;
+        }   
+
     }
 
     
     public class SingleSymbolRegularExpression : RegularExpression
     {
         public SymbolBase Value { get; set; }
-
-        public override bool IsMatch(string str)
-        {
-            throw new NotImplementedException();
-        }
     }
 
    
@@ -41,11 +40,6 @@ namespace Lab2.RegularExpressions
         private EmptySetRegularExpression()
         {
         }
-
-        public override bool IsMatch(string str)
-        {
-            return false;
-        }
     }
 
 
@@ -61,11 +55,6 @@ namespace Lab2.RegularExpressions
             this.left = left;
             this.right = right;
 
-        }
-
-        public override bool IsMatch(string str)
-        {
-            throw new NotImplementedException();
         }
     }
 
@@ -83,11 +72,6 @@ namespace Lab2.RegularExpressions
             this.right = right;
 
         }
-
-        public override bool IsMatch(string str)
-        {
-            throw new NotImplementedException();
-        }
     }
 
 
@@ -100,11 +84,6 @@ namespace Lab2.RegularExpressions
             if (baseExpression == null)
                 throw new ArgumentNullException();
             this.baseExpression = baseExpression;
-        }
-
-        public override bool IsMatch(string str)
-        {
-            throw new NotImplementedException();
         }
     }
 }
