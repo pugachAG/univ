@@ -112,22 +112,40 @@ namespace Lab2.Common
             return resAutomaton;
         }
 
+        private static FiniteStateAutomaton BasicAutomaton(RegularExpression regExpression)
+        {
+            StateDescription start = new StateDescription(string.Empty);
+            start.IsStart = true;
+            StateDescription finish = new StateDescription(string.Empty);
+            finish.IsFinish = true;
+            if (regExpression is SingleSymbolRegularExpression)
+            {
+                SingleSymbolRegularExpression singleSymbolExpression = (SingleSymbolRegularExpression)regExpression;
+                start.AddNewTransition(singleSymbolExpression.Value, finish);
+            }
+            FiniteStateAutomaton result = new FiniteStateAutomaton();
+            result.AddNewState(start);
+            result.AddNewState(finish);
+            return result;
+        }
+
         public static FiniteStateAutomaton ConvertToAutomaton(RegularExpression regExpression)
         {
             FiniteStateAutomaton resAutomaton = new FiniteStateAutomaton();
-            if (regExpression is EmptySetRegularExpression)
-                return null;
-            if (regExpression is SingleSymbolRegularExpression)
+            if (regExpression is EmptySetRegularExpression || regExpression is SingleSymbolRegularExpression)
             {
-                StateDescription state = new StateDescription(string.Empty);
-                state.IsStart = true;
-                StateDescription finish = new StateDescription(string.Empty);
-                state.AddNewTransition(regExpression. finish);
-                resAutomaton.AddNewState(state);
+                return BasicAutomaton(regExpression);
             }
             if (regExpression is ConcatenationRegularExpression)
-                return ConcatenationAutomaton(ConvertToAutomaton(regExpression.left, regExpression.right));
+            {
+                ConcatenationRegularExpression concantenationExpression = (ConcatenationRegularExpression)regExpression;
+                FiniteStateAutomaton automaton1 = ConvertToAutomaton(concantenationExpression.Left);
+                FiniteStateAutomaton automaton2 = ConvertToAutomaton(concantenationExpression.Right);
+                return ConcatenationAutomaton(automaton1, automaton2);
+            }
             return resAutomaton;
         }
+
+
     }
 }

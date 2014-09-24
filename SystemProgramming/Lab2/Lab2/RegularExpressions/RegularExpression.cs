@@ -45,16 +45,15 @@ namespace Lab2.RegularExpressions
 
     public class ConcatenationRegularExpression : RegularExpression
     {
-        private RegularExpression left = null;
-        private RegularExpression right = null;
+        public RegularExpression Left { get; set; }
+        public RegularExpression Right { get; set; }
 
         public ConcatenationRegularExpression (RegularExpression left, RegularExpression right)
         {
             if (left == null || right == null)
                 throw new ArgumentNullException();
-            this.left = left;
-            this.right = right;
-
+            this.Left = left;
+            this.Right = right;
         }
     }
 

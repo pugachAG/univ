@@ -43,7 +43,6 @@
   <ItemGroup>
     <Compile Include="Automata\AutomatonBuilder.cs" />
     <Compile Include="Automata\AutomatonExceptions.cs" />
-    <Compile Include="Automata\AutomatonHelper.cs" />
     <Compile Include="Automata\IIOAutomatonBuilder.cs" />
     <Compile Include="Automata\FiniteStateAutomaton.cs" />
     <Compile Include="Automata\IAutomaton.cs" />
