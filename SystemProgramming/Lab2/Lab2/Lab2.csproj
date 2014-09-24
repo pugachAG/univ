@@ -41,19 +41,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Automaton\AutomatonBuilder.cs" />
-    <Compile Include="Automaton\AutomatonExceptions.cs" />
-    <Compile Include="Automaton\IIOAutomatonBuilder.cs" />
-    <Compile Include="Automaton\FiniteStateAutomaton.cs" />
-    <Compile Include="Automaton\IAutomaton.cs" />
-    <Compile Include="Automaton\StateDescription.cs" />
-    <Compile Include="Automaton\Sybmol.cs" />
+    <Compile Include="Automata\AutomatonBuilder.cs" />
+    <Compile Include="Automata\AutomatonExceptions.cs" />
+    <Compile Include="Automata\AutomatonHelper.cs" />
+    <Compile Include="Automata\IIOAutomatonBuilder.cs" />
+    <Compile Include="Automata\FiniteStateAutomaton.cs" />
+    <Compile Include="Automata\IAutomaton.cs" />
+    <Compile Include="Automata\StateDescription.cs" />
+    <Compile Include="Common\RegExtAutomatonConvertor.cs" />
+    <Compile Include="Common\Sybmol.cs" />
     <Compile Include="IO\AutomatonReader.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RegularExpressions\RegularExpression.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

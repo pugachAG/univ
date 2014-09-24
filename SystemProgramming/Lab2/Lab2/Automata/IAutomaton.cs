@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab2.Automaton
+namespace Lab2.Automata
 {
     public interface IAutomaton
     {

@@ -1,4 +1,4 @@
-﻿using Lab2.Automaton;
+﻿using Lab2.Automata;
 using System;
 using System.Collections.Generic;
 using System.IO;

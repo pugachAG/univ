@@ -1,4 +1,4 @@
-﻿using Lab2.Automaton;
+﻿using Lab2.Automata;
 using Lab2.IO;
 using Lab2.Test.Assets;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

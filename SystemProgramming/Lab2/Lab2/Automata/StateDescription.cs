@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Lab2.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Lab2.Automaton
+namespace Lab2.Automata
 {
     public class StateDescription
     {
