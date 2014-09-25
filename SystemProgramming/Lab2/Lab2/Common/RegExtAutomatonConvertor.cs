@@ -143,6 +143,19 @@ namespace Lab2.Common
                 FiniteStateAutomaton automaton2 = ConvertToAutomaton(concantenationExpression.Right);
                 return ConcatenationAutomaton(automaton1, automaton2);
             }
+            if (regExpression is AlternationRegularExpression)
+            {
+                AlternationRegularExpression alternationExpression = (AlternationRegularExpression)regExpression;
+                FiniteStateAutomaton automaton1 = ConvertToAutomaton(alternationExpression.Left);
+                FiniteStateAutomaton automaton2 = ConvertToAutomaton(alternationExpression.Right);
+                return AlternationAutomaton(automaton1, automaton2);
+            }
+            if (regExpression is KleeneStarRegularExpression)
+            {
+                KleeneStarRegularExpression kleeneStarExpression = (KleeneStarRegularExpression)regExpression;
+                FiniteStateAutomaton baseAutomaton = ConvertToAutomaton(kleeneStarExpression.BaseExpression);
+                return KleeneStarAutomaton(baseAutomaton);
+            }
             return resAutomaton;
         }
 

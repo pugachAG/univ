@@ -1,4 +1,5 @@
 ﻿using Lab2.Common;
+using Lab2.Automata;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,11 +10,12 @@ using System.Threading.Tasks;
 
 namespace Lab2.RegularExpressions
 {
-    public abstract class RegularExpression
+    public class RegularExpression
     {
         public bool IsMatch(string str)
         {
-            return false;
+            FiniteStateAutomaton automaton = RegExtAutomatonConvertor.ConvertToAutomaton(this);
+            return automaton.CheckRecognizable(str);
         }   
 
     }
@@ -60,15 +62,15 @@ namespace Lab2.RegularExpressions
     
     public class AlternationRegularExpression : RegularExpression
     {
-        private RegularExpression left = null;
-        private RegularExpression right = null;
+        public RegularExpression Left { get; set; }
+        public RegularExpression Right { get; set; }
 
         public AlternationRegularExpression (RegularExpression left, RegularExpression right)
         {
             if (left == null || right == null)
                 throw new ArgumentNullException();
-            this.left = left;
-            this.right = right;
+            this.Left = left;
+            this.Right = right;
 
         }
     }
@@ -76,13 +78,13 @@ namespace Lab2.RegularExpressions
 
     public class KleeneStarRegularExpression : RegularExpression
     {
-        private RegularExpression baseExpression;
+        public RegularExpression BaseExpression { get; set; }
 
         public KleeneStarRegularExpression(RegularExpression baseExpression)
         {
             if (baseExpression == null)
                 throw new ArgumentNullException();
-            this.baseExpression = baseExpression;
+            this.BaseExpression = baseExpression;
         }
     }
 }
