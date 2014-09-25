@@ -24,6 +24,11 @@ namespace Lab2.RegularExpressions
     public class SingleSymbolRegularExpression : RegularExpression
     {
         public SymbolBase Value { get; set; }
+
+        public SingleSymbolRegularExpression(SymbolBase value)
+        {
+            this.Value = value;
+        }
     }
 
    
