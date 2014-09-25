@@ -12,14 +12,14 @@ namespace Lab2.Common
     {
         private static FiniteStateAutomaton KleeneStarAutomaton(FiniteStateAutomaton automaton)
         {
-            StateDescription old_start = automaton.GetStart();
-            if (old_start == null)
+            StateDescription oldStart = automaton.GetStart();
+            if (oldStart == null)
                 throw new NullReferenceException();
-            old_start.IsStart = false;
+            oldStart.IsStart = false;
             StateDescription start = new StateDescription(string.Empty);
             automaton.AddNewState(start);
             start.IsStart = true;
-            start.AddNewTransition(EpsilonSymbol.Instance, old_start);
+            start.AddNewTransition(EpsilonSymbol.Instance, oldStart);
             StateDescription finish = new StateDescription(string.Empty);
             automaton.AddNewState(finish);
             start.AddNewTransition(EpsilonSymbol.Instance, finish);
@@ -28,7 +28,7 @@ namespace Lab2.Common
             foreach (StateDescription st in automaton.GetFinishes())
             {
                 st.AddNewTransition(EpsilonSymbol.Instance, finish);
-                st.AddNewTransition(EpsilonSymbol.Instance, old_start);
+                st.AddNewTransition(EpsilonSymbol.Instance, oldStart);
                 st.IsFinish = false;
             }
             return automaton;
@@ -38,10 +38,12 @@ namespace Lab2.Common
         private static FiniteStateAutomaton ConcatenationAutomaton(FiniteStateAutomaton left, FiniteStateAutomaton right)
         {
             FiniteStateAutomaton resAutomaton = new FiniteStateAutomaton();
-            StateDescription start = new StateDescription(string.Empty);
+            StateDescription start = new StateDescription("start");
             resAutomaton.AddNewState(start);
-            StateDescription finish = new StateDescription(string.Empty);
+            start.IsStart = true;
+            StateDescription finish = new StateDescription("finish");
             resAutomaton.AddNewState(finish);
+            finish.IsFinish = true;
             StateDescription rightStart = right.GetStart();
             if (rightStart == null)
                 throw new NullReferenceException();
@@ -77,10 +79,12 @@ namespace Lab2.Common
         private static FiniteStateAutomaton AlternationAutomaton (FiniteStateAutomaton left, FiniteStateAutomaton right)
         {
             FiniteStateAutomaton resAutomaton = new FiniteStateAutomaton();
-            StateDescription start = new StateDescription(string.Empty);
+            StateDescription start = new StateDescription("start");
             resAutomaton.AddNewState(start);
-            StateDescription finish = new StateDescription(string.Empty);
+            start.IsStart = true;
+            StateDescription finish = new StateDescription("finish");
             resAutomaton.AddNewState(finish);
+            finish.IsFinish = true;
             foreach (StateDescription st in left.GetAllStates())
             {
                 resAutomaton.AddNewState(st);
@@ -114,9 +118,9 @@ namespace Lab2.Common
 
         private static FiniteStateAutomaton BasicAutomaton(RegularExpression regExpression)
         {
-            StateDescription start = new StateDescription(string.Empty);
+            StateDescription start = new StateDescription("start");
             start.IsStart = true;
-            StateDescription finish = new StateDescription(string.Empty);
+            StateDescription finish = new StateDescription("finish");
             finish.IsFinish = true;
             if (regExpression is SingleSymbolRegularExpression)
             {
