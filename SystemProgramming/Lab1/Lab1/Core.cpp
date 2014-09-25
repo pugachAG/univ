@@ -65,6 +65,16 @@ bool DataHandler::IsSeparator(char& ch)
 	return ch >= -1 && ch <= 255 && !isalpha(ch);
 }
 
+map<string, int> DataHandler::GetWordsCount()
+{
+	if (previousQueryResidue.length())
+	{
+		words[previousQueryResidue]++;
+		previousQueryResidue = "";
+	}
+	return this->words;
+}
+
 pair<vector<string>, int> DataHandler::GetMostFrequentWords()
 {
 	LOGI("GetMostFrequentWords start");
@@ -123,4 +133,29 @@ void Core::ProcessQuery(const string& filePath)
 	}
 	
 	
+}
+
+void Core::ProcessQueryVariation2(const string& filePath)
+{
+	try
+	{
+		DataProvider provider(filePath);
+		DataHandler handler;
+		while (provider.CanGetNextChunk())
+		{
+			handler.HandleChunk(provider.GetNextChunk());
+		}
+
+		map<string, int> words = handler.GetWordsCount();
+		for (map<string, int>::iterator it = words.begin(); it != words.end(); it++)
+		{
+			cout << it->first << " " << it->second << endl;
+		}
+	}
+	catch (exception& ex)
+	{
+		cout << "Error: " << ex.what() << endl;
+	}
+
+
 }

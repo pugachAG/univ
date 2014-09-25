@@ -33,6 +33,8 @@ public:
 
 	pair<vector<string>, int> GetMostFrequentWords();
 
+	map<string, int> GetWordsCount();
+
 private:
 	map<string, int> words;
 	string previousQueryResidue;
@@ -46,4 +48,7 @@ class Core
 {
 public:
 	static void ProcessQuery(const string& filePath); 
+
+	static void ProcessQueryVariation2(const string& filePath);
+
 };
