@@ -3,7 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Lab2.Common;
 using Lab2.RegularExpressions;
 
-namespace Lab2.Test.RegularExpression
+namespace Lab2.Test.RegularExpressions
 {
     [TestClass]
     public class RegexMatchTester
