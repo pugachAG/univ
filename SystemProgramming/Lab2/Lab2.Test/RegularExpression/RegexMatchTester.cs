@@ -39,7 +39,7 @@ namespace Lab2.Test.RegularExpression
             };
 
             foreach(string str in acceptable)
-                Assert.IsTrue(isMatch(str));
+                Assert.IsTrue(isMatch(str), str);
 
             string[] unacceptable = new string[]
             {
@@ -56,7 +56,7 @@ namespace Lab2.Test.RegularExpression
             };
 
             foreach (string str in unacceptable)
-                Assert.IsFalse(isMatch(str));
+                Assert.IsFalse(isMatch(str), str);
             
         }
     }
