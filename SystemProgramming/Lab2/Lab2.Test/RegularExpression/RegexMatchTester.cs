@@ -34,8 +34,7 @@ namespace Lab2.Test.RegularExpression
                 "aac",
                 "abac",
                 "abababbabababbbababbabababababababbabababac",
-                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac",
-                "abbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbaaaaaaaaaaaaabbbbbbbbbbbbaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbacacacacc"
+                "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaac"
             };
 
             foreach(string str in acceptable)

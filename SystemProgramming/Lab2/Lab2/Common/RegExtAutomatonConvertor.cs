@@ -16,11 +16,11 @@ namespace Lab2.Common
             if (oldStart == null)
                 throw new NullReferenceException();
             oldStart.IsStart = false;
-            StateDescription start = new StateDescription(string.Empty);
+            StateDescription start = new StateDescription("start");
             automaton.AddNewState(start);
             start.IsStart = true;
             start.AddNewTransition(EpsilonSymbol.Instance, oldStart);
-            StateDescription finish = new StateDescription(string.Empty);
+            StateDescription finish = new StateDescription("finish");
             automaton.AddNewState(finish);
             start.AddNewTransition(EpsilonSymbol.Instance, finish);
             if (automaton.GetFinishes() == null)
@@ -31,6 +31,7 @@ namespace Lab2.Common
                 st.AddNewTransition(EpsilonSymbol.Instance, oldStart);
                 st.IsFinish = false;
             }
+            finish.IsFinish = true;
             return automaton;
         }
 
