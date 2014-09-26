@@ -47,12 +47,8 @@
     <Compile Include="Automata\FiniteStateAutomaton.cs" />
     <Compile Include="Automata\IAutomaton.cs" />
     <Compile Include="Automata\StateDescription.cs" />
-<<<<<<< HEAD
     <Compile Include="Common\RegExpAutomatonConverter.cs" />
-=======
     <Compile Include="Common\AutomatonToRegExConvert.cs" />
-    <Compile Include="Common\RegExtAutomatonConvertor.cs" />
->>>>>>> c1fcb9305e8fa820642d5a34aa3513bb949255d9
     <Compile Include="Common\Sybmol.cs" />
     <Compile Include="IO\AutomatonReader.cs" />
     <Compile Include="Program.cs" />
