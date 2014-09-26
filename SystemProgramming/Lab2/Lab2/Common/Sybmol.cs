@@ -54,6 +54,11 @@ namespace Lab2.Common
         private EpsilonSymbol()
         {
         }
+
+        public override string ToString()
+        {
+            return "<Eps>";
+        }
         
     }
 }

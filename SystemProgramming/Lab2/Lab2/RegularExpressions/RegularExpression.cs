@@ -14,9 +14,14 @@ namespace Lab2.RegularExpressions
     {
         public bool IsMatch(string str)
         {
-            FiniteStateAutomaton automaton = RegExtAutomatonConvertor.ConvertToAutomaton(this);
+            FiniteStateAutomaton automaton = RegExpAutomatonConverter.ConvertToAutomaton(this);
             return automaton.CheckRecognizable(str);
-        }   
+        } 
+  
+        public string ToStringWithParanteses()
+        {
+            return string.Format("({0})", ToString());
+        }
 
     }
 
@@ -28,6 +33,11 @@ namespace Lab2.RegularExpressions
         public SingleSymbolRegularExpression(SymbolBase value)
         {
             this.Value = value;
+        }
+
+        public override string ToString()
+        {
+            return this.Value.ToString();
         }
     }
 
@@ -47,6 +57,11 @@ namespace Lab2.RegularExpressions
         private EmptySetRegularExpression()
         {
         }
+        
+        public override string ToString()
+        {
+            return string.Empty;
+        }
     }
 
 
@@ -61,6 +76,18 @@ namespace Lab2.RegularExpressions
                 throw new ArgumentNullException();
             this.Left = left;
             this.Right = right;
+        }
+
+        public override string ToString()
+        {
+            string left = this.Left.ToString();
+            string right = this.Right.ToString();
+
+            if (Left is AlternationRegularExpression)
+                left = Left.ToStringWithParanteses();
+            if (Right is AlternationRegularExpression)
+                right = ToStringWithParanteses();
+            return left + right;
         }
     }
 
@@ -78,6 +105,13 @@ namespace Lab2.RegularExpressions
             this.Right = right;
 
         }
+        
+        public override string ToString()
+        {
+            string left = this.Left.ToString();
+            string right = this.Right.ToString();
+            return left + "+ " + right;
+        }
     }
 
 
@@ -90,6 +124,16 @@ namespace Lab2.RegularExpressions
             if (baseExpression == null)
                 throw new ArgumentNullException();
             this.BaseExpression = baseExpression;
+        }
+
+        public override string ToString()
+        {
+            if (this.BaseExpression is SingleSymbolRegularExpression)
+                return this.BaseExpression.ToString() + "*";
+            if (this.BaseExpression is KleeneStarRegularExpression)
+                return this.BaseExpression.ToString();
+            return this.BaseExpression.ToStringWithParanteses() + "*";
+
         }
     }
 }

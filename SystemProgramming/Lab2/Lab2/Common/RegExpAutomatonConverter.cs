@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Lab2.Common
 {
-    public static class RegExtAutomatonConvertor
+    public static class RegExpAutomatonConverter
     {
         private static FiniteStateAutomaton KleeneStarAutomaton(FiniteStateAutomaton automaton)
         {
