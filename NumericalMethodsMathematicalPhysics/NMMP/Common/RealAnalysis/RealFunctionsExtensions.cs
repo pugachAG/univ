@@ -8,7 +8,7 @@ namespace Common.RealAnalysis
 {
     public static class RealFunctionsExtensions
     {
-        public static IRealFunction ToRealFunction(this Func<double, double> func)
+        public static BaseRealFunction ToRealFunction(this Func<double, double> func)
         {
             return new FuncRealFunction(func);
         }

@@ -24,7 +24,7 @@ namespace Tests.RealAnalysis
             CheckIntegralValue(new Func<double, double>(x => Math.Exp(x)).ToRealFunction(), 0, 4, Math.Exp(4) - 1.0);
         }
 
-        private void CheckIntegralValue(IRealFunction function, double a, double b, double preciseValue)
+        private void CheckIntegralValue(BaseRealFunction function, double a, double b, double preciseValue)
         {
             double actualValue = IntegralCalculator.RiemannIntegral(function, a, b);
             Assert.AreEqual(preciseValue, actualValue, Delta);
