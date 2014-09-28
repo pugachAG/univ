@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Algebra\LinearEquationsSolver.cs" />
     <Compile Include="Algebra\Matrix.cs" />
+    <Compile Include="Lab1\BubnovGalerkinMethod.cs" />
     <Compile Include="Lab1\InputData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RealAnalysis\FuncRealFunction.cs" />
