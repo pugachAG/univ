@@ -18,7 +18,7 @@ namespace Tests.RealAnalysis
             CheckValue(new FuncRealFunction(x => x * x).GetNthFunctionalDerivative(1), 1, 2);
             CheckValue(new FuncRealFunction(x => x * x).GetNthFunctionalDerivative(1).GetNthFunctionalDerivative(1), 1, 2);
             CheckValue(new FuncRealFunction(x => Math.Exp(x)).
-                GetNthFunctionalDerivative(3), 
+                GetNthFunctionalDerivative(4), 
                 1, Math.Exp(1));
 
 
@@ -33,7 +33,7 @@ namespace Tests.RealAnalysis
                 actual3rdDerived
             };
 
-            int testCasesCount = 10;
+            int testCasesCount = 100;
             FuncRealFunction function = new FuncRealFunction(func);
             for (int i = 0; i < testCasesCount; i++)
             {

@@ -11,6 +11,12 @@ namespace Common.RealAnalysis
         public abstract double GetValue(double arg);
 
         public abstract BaseRealFunction GetNthFunctionalDerivative(int n);
+
+        public abstract BaseRealFunction Mult(BaseRealFunction f);
+
+        public abstract BaseRealFunction Sum(BaseRealFunction f);
+
+        public abstract BaseRealFunction Minus();
     }
 
 

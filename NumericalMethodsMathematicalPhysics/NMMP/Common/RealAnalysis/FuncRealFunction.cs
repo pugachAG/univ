@@ -40,14 +40,29 @@ namespace Common.RealAnalysis
             return current;
         }
 
+        public override BaseRealFunction Mult(BaseRealFunction f)
+        {
+            return new FuncRealFunction(arg => this.GetValue(arg) * f.GetValue(arg));
+        }
+
         public static FuncRealFunction operator *(FuncRealFunction f1, FuncRealFunction f2)
         {
-            return new FuncRealFunction(arg => f1.GetValue(arg) * f2.GetValue(arg));
+            return (FuncRealFunction)f1.Mult(f2);
         }
 
         public static FuncRealFunction operator +(FuncRealFunction f1, FuncRealFunction f2)
         {
-            return new FuncRealFunction(arg => f1.GetValue(arg) + f2.GetValue(arg));
+            return (FuncRealFunction)f1.Sum(f2);
+        }
+
+        public override BaseRealFunction Sum(BaseRealFunction f)
+        {
+            return new FuncRealFunction(arg => this.GetValue(arg) + f.GetValue(arg));
+        }
+
+        public override BaseRealFunction Minus()
+        {
+            return new FuncRealFunction(arg => -this.GetValue(arg));
         }
     }
 }
