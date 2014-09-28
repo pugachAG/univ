@@ -44,9 +44,9 @@ namespace Lab2.IO
                 string[] line = lines[i].Split(' ').Select(str => str.Trim()).ToArray();
                 int from = ParseInt(line[0]);
                 tryAddState(from);
-                int to = ParseInt(line[1]);
+                int to = ParseInt(line[2]);
                 tryAddState(to);
-                char? label = line[2] == "eps" ? null : new char?(line[2][0]);
+                char? label = line[1] == "eps" ? null : new char?(line[1][0]);
                 builder.AddTransition(from, to, label);
             }
             return builder.GetAutomaton();

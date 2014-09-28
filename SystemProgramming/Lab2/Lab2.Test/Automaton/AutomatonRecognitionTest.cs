@@ -34,11 +34,13 @@ namespace Lab2.Test.Automata
                     {
                         Assert.Fail("Automaton recognition failed on test {0}, test string {1}", i + 1, pair.Key);
                     }
+                    /*
                     bool regexResult = regex.IsMatch(pair.Key);
                     if (regexResult != pair.Value)
                     {
                         Assert.Fail("Regular Expression recognition failed on test {0}, test string {1}", i + 1, pair.Key);
                     }
+                    */
                 }
             }
 

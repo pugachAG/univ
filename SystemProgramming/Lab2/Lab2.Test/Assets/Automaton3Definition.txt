@@ -2,14 +2,14 @@
 2
 1
 1 9
-1 2 eps
-1 9 eps
-2 3 eps
-2 4 eps
-3 5 0
-4 6 1
-5 8 eps
-6 7 0
-7 8 eps
-8 2 eps
-8 9 eps
+1 eps 2
+1 eps 9
+2 eps 3
+2 eps 4
+3 0 5
+4 1 6
+5 eps 8
+6 0 7
+7 eps 8
+8 eps 2
+8 eps 9
