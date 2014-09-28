@@ -14,7 +14,7 @@ namespace Tests.Lab1
 
         static Lab1Tester()
         {
-            solution = BubnovGalerkinMethod.GetSolution();
+            solution = Lab1Solver.GetSolution(Method.BubnovGalerkin);
         }
 
         [TestMethod]

@@ -19,7 +19,7 @@ namespace Common.RealAnalysis
 
         public double GetScalarProduct(BaseRealFunction f1, BaseRealFunction f2)
         {
-            return IntegralCalculator.RiemannIntegral(f1.Mult(f2), a, b);
+            return (1.0  / (b - a)) * IntegralCalculator.RiemannIntegral(f1.Mult(f2), a, b);
         }
     }
 }

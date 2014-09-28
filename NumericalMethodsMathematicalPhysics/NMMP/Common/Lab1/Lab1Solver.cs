@@ -8,14 +8,20 @@ using System.Threading.Tasks;
 
 namespace Common.Lab1
 {
-    public static class BubnovGalerkinMethod
+    public enum Method
+    {
+        BubnovGalerkin,
+        LeastSquares
+    }
+
+    public static class Lab1Solver
     {
         private static HilbertSpace scalarProductSpace = new HilbertSpace(InputData.a, InputData.b);
         private static BaseRealFunction[] phi = new BaseRealFunction[InputData.BasisFunctionsCount];
         private static BaseRealFunction[] Aphi = new BaseRealFunction[InputData.BasisFunctionsCount];
 
 
-        static BubnovGalerkinMethod()
+        static Lab1Solver()
         {
             InitPhi();
         }
@@ -25,7 +31,7 @@ namespace Common.Lab1
             return phi[i];
         }
 
-        public static FuncRealFunction GetSolution()
+        public static FuncRealFunction GetSolution(Method method)
         {
             int n = InputData.BasisFunctionsCount;
             Matrix<double> a = new Matrix<double>(n, n);
@@ -34,9 +40,16 @@ namespace Common.Lab1
             {
                 for (int column = 0; column < n; column++)
                 {
-                    a[row, column] = scalarProductSpace.GetScalarProduct(Aphi[column], phi[row]);
+                    a[row, column] =
+                        method == Method.BubnovGalerkin ?
+                        scalarProductSpace.GetScalarProduct(Aphi[column], phi[row]) :
+                        scalarProductSpace.GetScalarProduct(Aphi[column], Aphi[row]);
+
                 }
-                b[row, 0] = scalarProductSpace.GetScalarProduct(InputData.f, phi[row]);
+                b[row, 0] =
+                    method == Method.BubnovGalerkin ?
+                    scalarProductSpace.GetScalarProduct(InputData.f, phi[row]) :
+                    scalarProductSpace.GetScalarProduct(InputData.f, Aphi[row]); 
             }
             Matrix<double> c = LinearEquationsSolver.Solve(a, b);
 
@@ -52,9 +65,9 @@ namespace Common.Lab1
             return result;
         }
 
-        public static async Task<FuncRealFunction> GetSolutionAsync()
+        public static async Task<FuncRealFunction> GetSolutionAsync(Method method)
         {
-            var task = new Task<FuncRealFunction>(GetSolution);
+            var task = new Task<FuncRealFunction>(() => GetSolution(method));
             task.Start();
             FuncRealFunction solution = await task;
             return solution;

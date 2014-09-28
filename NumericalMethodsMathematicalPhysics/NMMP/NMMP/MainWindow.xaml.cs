@@ -41,8 +41,10 @@ namespace NMMP
 
 
             ObservableCollection<IFunction> functions = new ObservableCollection<IFunction>();
-            BaseRealFunction solution = await BubnovGalerkinMethod.GetSolutionAsync();
-            functions.Add(solution.ToIFunction());
+            BaseRealFunction solutionBG = await Lab1Solver.GetSolutionAsync(Method.BubnovGalerkin);
+            functions.Add(solutionBG.ToIFunction());
+            BaseRealFunction solutionLS = await Lab1Solver.GetSolutionAsync(Method.LeastSquares);
+            functions.Add(solutionLS.ToIFunction());
             functions.Add(InputData.Solution.ToIFunction());
             canvas.Functions = functions;
 

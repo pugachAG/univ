@@ -10,7 +10,7 @@
         </Grid.RowDefinitions>
         
         <Button
-            Content="BubnovGalerkinMethod"
+            Content="Run!"
             x:Name="btnBG"
             Click="Button_Click"
             Grid.Row="0" />
