@@ -24,8 +24,8 @@ namespace WPMControls.Drawing
         public double GetValue(double x)
         {
             //ugly hack, boxing, exceptions etc...
-            T arg = (T)(object)x;
-            double result = (double)(object)func(arg);
+            T arg = (T)Convert.ChangeType(x, typeof(T));
+            double result = (double)Convert.ChangeType(func(arg), typeof(double));
             return result;
         }
     }
