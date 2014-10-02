@@ -1,5 +1,7 @@
 ﻿using Lab2.Automata;
+using Lab2.Common;
 using Lab2.IO;
+using Lab2.RegularExpressions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +16,31 @@ namespace Lab2
 
         static void Main(string[] args)
         {
+            Variant18();
+            Console.WriteLine();
             Variant3();
             Console.ReadLine();
         }
 
         static void Variant3()
+        {
+            FiniteStateAutomaton automaton = ReadAutomaton();
+            while (true)
+            {
+                Console.WriteLine("Input string:");
+                string str = Console.ReadLine();
+                Console.WriteLine("Recognition result: {0}", automaton.CheckRecognizable(str));
+            }
+        }
+
+        static void Variant18()
+        {
+            FiniteStateAutomaton automaton = ReadAutomaton();
+            RegularExpression regex = AutomatonToRegExConvert.StateRemovalMethod(automaton);
+            Console.WriteLine(regex.ToString());
+        }
+
+        static FiniteStateAutomaton ReadAutomaton()
         {
             IAutomaton automaton = null;
             try
@@ -29,15 +51,8 @@ namespace Lab2
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return;
             }
-            while (true)
-            {
-                Console.WriteLine("Input string:");
-                string str = Console.ReadLine();
-                Console.WriteLine("Recognition result: {0}", automaton.CheckRecognizable(str));
-            }
+            return automaton as FiniteStateAutomaton;
         }
-
     }
 }
