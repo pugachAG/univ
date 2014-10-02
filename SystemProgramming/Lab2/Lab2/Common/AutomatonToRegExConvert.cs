@@ -95,6 +95,7 @@ namespace Lab2.Common
                 regexAutomaton.AddNewState(newState);
             }
 
+
             foreach (var state in automaton.GetAllStates())
             {
                 StateDescription newState = oldStatesToNew[state]; 
@@ -115,6 +116,21 @@ namespace Lab2.Common
                     }
                 }
             }
+
+
+            int finishStatesCount = regexAutomaton.GetAllStates().Count(st => st.IsFinish);
+            if(finishStatesCount > 1)
+            {
+                StateDescription newFinish = new StateDescription("finish") { IsFinish = true };
+                foreach (StateDescription state in regexAutomaton.GetAllStates().Where(st => st.IsFinish))
+                {
+                    state.IsFinish = false;
+                    state.AddNewTransition(new RegexLabel(EpsilonSymbol.Instance), newFinish);
+                }
+                regexAutomaton.AddNewState(newFinish);
+            }
+
+
             return regexAutomaton;
         }
     }
