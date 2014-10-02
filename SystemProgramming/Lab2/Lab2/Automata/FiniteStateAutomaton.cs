@@ -19,6 +19,13 @@ namespace Lab2.Automata
             stateDescriptions.Add(newState);
         }
 
+        public void RemoveState(StateDescription state)
+        {
+            if (state == null)
+                throw new ArgumentNullException();
+            stateDescriptions.Remove(state);
+        }
+
         public List<StateDescription> GetAllStates()
         {
             return stateDescriptions;

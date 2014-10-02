@@ -110,7 +110,7 @@ namespace Lab2.RegularExpressions
         {
             string left = this.Left.ToString();
             string right = this.Right.ToString();
-            return left + "+ " + right;
+            return left + "+" + right;
         }
     }
 

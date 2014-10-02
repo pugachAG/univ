@@ -61,5 +61,25 @@ namespace Lab2.Automata
             }
             return stateClosure;
         }
+
+        public HashSet<SymbolBase> GetLabelsToState(StateDescription state)
+        {
+            HashSet<SymbolBase> result = new HashSet<SymbolBase>();
+            foreach (var pair in transitions)
+                foreach (var st in pair.Value)
+                    if (st == state)
+                    {
+                        result.Add(pair.Key);
+                    }
+            return result;
+        }
+
+        public void RemoveAllTransitionsTo(StateDescription state)
+        {
+            foreach (var pair in transitions)
+            {
+                pair.Value.Remove(state);
+            }
+        }
     }
 }

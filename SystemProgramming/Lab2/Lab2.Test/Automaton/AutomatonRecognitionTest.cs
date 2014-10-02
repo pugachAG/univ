@@ -25,7 +25,7 @@ namespace Lab2.Test.Automata
             for (int i = 0; i < testsCount; i++)
             {
                 IAutomaton automaton = ReadAutomaton(automatonDefsPaths[i]);
-                RegularExpression regex = AutomatonToRegExConvert.ConvertToRegularExpression((FiniteStateAutomaton)automaton); 
+                RegularExpression regex = AutomatonToRegExConvert.StateRemovalMethod((FiniteStateAutomaton)automaton); 
                 Dictionary<string, bool> tests = ReadTests(automatonTestsPaths[i]);
                 foreach (var pair in tests)
                 {
@@ -34,13 +34,13 @@ namespace Lab2.Test.Automata
                     {
                         Assert.Fail("Automaton recognition failed on test {0}, test string {1}", i + 1, pair.Key);
                     }
-                    /*
+                    
                     bool regexResult = regex.IsMatch(pair.Key);
                     if (regexResult != pair.Value)
                     {
                         Assert.Fail("Regular Expression recognition failed on test {0}, test string {1}", i + 1, pair.Key);
                     }
-                    */
+                    
                 }
             }
 
