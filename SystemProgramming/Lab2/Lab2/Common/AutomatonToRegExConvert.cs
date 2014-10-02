@@ -13,8 +13,9 @@ namespace Lab2.Common
         public static RegularExpression StateRemovalMethod(FiniteStateAutomaton automaton)
         {
             FiniteStateAutomaton regexAutomaton = CloneAutomaton(automaton);
-            foreach (var state in regexAutomaton.GetAllStates().Where(st => !(st.IsFinish || st.IsStart)))
+            while(regexAutomaton.GetAllStates().Any(st => !(st.IsFinish || st.IsStart)))
             {
+                StateDescription state = regexAutomaton.GetAllStates().First(st => !(st.IsFinish || st.IsStart));
                 var currentStates = regexAutomaton.GetAllStates().Where(st => st != state);
                 RegexLabel selfLabel = state.GetLabelsToState(state).FirstOrDefault() as RegexLabel;
                 foreach (var st1 in currentStates)
@@ -44,7 +45,41 @@ namespace Lab2.Common
                 }
                 regexAutomaton.RemoveState(state);
             }
-            return null;
+
+            StateDescription startState = regexAutomaton.GetAllStates().Where(st => st.IsStart).First();
+            StateDescription finishState = regexAutomaton.GetAllStates().Where(st => st.IsFinish).First();
+
+            RegexLabel toFinish = startState.GetLabelsToState(finishState).FirstOrDefault() as RegexLabel;
+            RegexLabel toStart = finishState.GetLabelsToState(startState).FirstOrDefault() as RegexLabel;
+            RegexLabel selftStart = startState.GetLabelsToState(startState).FirstOrDefault() as RegexLabel;
+            RegexLabel selfFinish = finishState.GetLabelsToState(finishState).FirstOrDefault() as RegexLabel;
+
+            if (toFinish == null)
+                return EmptySetRegularExpression.EmptySet;
+
+            RegularExpression result = toFinish.Regex;
+            if (selftStart != null || toStart != null)
+            {
+                RegularExpression current = selftStart != null ? selftStart.Regex : null;
+                if (toStart != null)
+                {
+                    RegularExpression right = toFinish.Regex;
+                    if (selfFinish != null)
+                    {
+                        right = new ConcatenationRegularExpression(right, new KleeneStarRegularExpression(selfFinish.Regex));
+                    }
+                    right = new ConcatenationRegularExpression(right, toStart.Regex);
+                    current = current == null ?
+                        right :
+                        new AlternationRegularExpression(right, current);
+                }
+                result = new ConcatenationRegularExpression(new KleeneStarRegularExpression(current), result);
+            }
+            if (selfFinish != null)
+            {
+                result = new ConcatenationRegularExpression(result, new KleeneStarRegularExpression(selfFinish.Regex));
+            }
+            return result;
         }
 
         private static FiniteStateAutomaton CloneAutomaton(FiniteStateAutomaton automaton)
@@ -53,7 +88,7 @@ namespace Lab2.Common
             Dictionary<StateDescription, StateDescription> oldStatesToNew = new Dictionary<StateDescription, StateDescription>();
             foreach (var state in automaton.GetAllStates())
             {
-                StateDescription newState = new StateDescription("");
+                StateDescription newState = new StateDescription(state.Name);
                 newState.IsStart = state.IsStart;
                 newState.IsFinish = state.IsFinish;
                 oldStatesToNew[state] = newState;
@@ -65,6 +100,7 @@ namespace Lab2.Common
                 StateDescription newState = oldStatesToNew[state]; 
                 foreach (var st in automaton.GetAllStates())
                 {
+                    StateDescription newSt = oldStatesToNew[st];
                     HashSet<SymbolBase> symbols = state.GetLabelsToState(st);
                     RegularExpression regex = null;
                     foreach (var sb in symbols)
@@ -72,9 +108,11 @@ namespace Lab2.Common
                         RegularExpression symbolRegex = new SingleSymbolRegularExpression(sb);
                         regex = (regex == null) ? symbolRegex : new AlternationRegularExpression(regex, symbolRegex);
                     }
-                    RegexLabel label = new RegexLabel(regex);
-                    StateDescription newSt = oldStatesToNew[st];
-                    newState.AddNewTransition(label, newSt);
+                    if (regex != null)
+                    {
+                        RegexLabel label = new RegexLabel(regex);
+                        newState.AddNewTransition(label, newSt);
+                    }
                 }
             }
             return regexAutomaton;

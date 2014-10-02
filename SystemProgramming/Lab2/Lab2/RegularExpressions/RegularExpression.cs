@@ -60,7 +60,7 @@ namespace Lab2.RegularExpressions
         
         public override string ToString()
         {
-            return string.Empty;
+            return "<0>";
         }
     }
 
@@ -86,7 +86,7 @@ namespace Lab2.RegularExpressions
             if (Left is AlternationRegularExpression)
                 left = Left.ToStringWithParanteses();
             if (Right is AlternationRegularExpression)
-                right = ToStringWithParanteses();
+                right = Right.ToStringWithParanteses();
             return left + right;
         }
     }
@@ -104,6 +104,15 @@ namespace Lab2.RegularExpressions
             this.Left = left;
             this.Right = right;
 
+        }
+
+        public static RegularExpression Create(RegularExpression left, RegularExpression right)
+        {
+            if (left is EmptySetRegularExpression)
+                return right;
+            if (right is EmptySetRegularExpression)
+                return left;
+            return new AlternationRegularExpression(left, right);
         }
         
         public override string ToString()

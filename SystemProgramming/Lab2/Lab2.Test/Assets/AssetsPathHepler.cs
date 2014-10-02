@@ -27,7 +27,7 @@ namespace Lab2.Test.Assets
         private static string[] GenerateFilePaths(string prefix, string suffix, int count, string extension = ".txt")
         {
             List<string> result = new List<string>();
-            for (int i = 1; i <= count; i++)
+            for (int i = 0; i <= count; i++)
                 result.Add(string.Format("{0}{1}{2}{3}{4}", AssetsFolerPrefix, prefix, i, suffix, extension));
             return result.ToArray();
         }

@@ -6,6 +6,7 @@ using Lab2.Test.Assets;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -25,7 +26,8 @@ namespace Lab2.Test.Automata
             for (int i = 0; i < testsCount; i++)
             {
                 IAutomaton automaton = ReadAutomaton(automatonDefsPaths[i]);
-                RegularExpression regex = AutomatonToRegExConvert.StateRemovalMethod((FiniteStateAutomaton)automaton); 
+                RegularExpression regex = AutomatonToRegExConvert.StateRemovalMethod((FiniteStateAutomaton)automaton);
+                Debug.WriteLine(regex.ToString());
                 Dictionary<string, bool> tests = ReadTests(automatonTestsPaths[i]);
                 foreach (var pair in tests)
                 {
