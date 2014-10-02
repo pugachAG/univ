@@ -23,6 +23,11 @@ namespace Lab2.RegularExpressions
             return string.Format("({0})", ToString());
         }
 
+        public virtual bool IsEpsilon()
+        {
+            return false;
+        }
+
     }
 
     
@@ -38,6 +43,11 @@ namespace Lab2.RegularExpressions
         public override string ToString()
         {
             return this.Value.ToString();
+        }
+
+        public override bool IsEpsilon()
+        {
+            return this.Value == EpsilonSymbol.Instance;
         }
     }
 
@@ -88,6 +98,20 @@ namespace Lab2.RegularExpressions
             if (Right is AlternationRegularExpression)
                 right = Right.ToStringWithParanteses();
             return left + right;
+        }
+
+        public static RegularExpression Create(RegularExpression left, RegularExpression right)
+        {
+            if (left is EmptySetRegularExpression || right is EmptySetRegularExpression)
+                return EmptySetRegularExpression.EmptySet;
+
+            if (left.IsEpsilon())
+                return right;
+
+            if (right.IsEpsilon())
+                return left;
+
+            return new ConcatenationRegularExpression(left, right);
         }
     }
 
@@ -142,7 +166,17 @@ namespace Lab2.RegularExpressions
             if (this.BaseExpression is KleeneStarRegularExpression)
                 return this.BaseExpression.ToString();
             return this.BaseExpression.ToStringWithParanteses() + "*";
+        }
 
+        public static RegularExpression Create(RegularExpression baseExpression)
+        {
+            if (baseExpression is EmptySetRegularExpression || baseExpression.IsEpsilon())
+                return new SingleSymbolRegularExpression(EpsilonSymbol.Instance);
+
+            if (baseExpression is KleeneStarRegularExpression)
+                return baseExpression;
+
+            return new KleeneStarRegularExpression(baseExpression);
         }
     }
 }

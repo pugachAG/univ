@@ -1,4 +1,6 @@
 ab 1
 accccccccccccccb 1
 aaaaaaaaaaaaaaaaaaab 1
+aaaaabbbbbbbb 1
+acbcacbcacbcacbcacbcacbcacbcacbcb 1
 aa 0

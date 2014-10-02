@@ -29,14 +29,14 @@ namespace Lab2.Common
                             RegularExpression lblRegex = from.Regex;
                             if (selfLabel != null)
                             {
-                                RegularExpression selfRegex = new KleeneStarRegularExpression(selfLabel.Regex);
-                                lblRegex = new ConcatenationRegularExpression(lblRegex, selfRegex);
+                                RegularExpression selfRegex = KleeneStarRegularExpression.Create(selfLabel.Regex);
+                                lblRegex = ConcatenationRegularExpression.Create(lblRegex, selfRegex);
                             }
-                            lblRegex = new ConcatenationRegularExpression(lblRegex, to.Regex);
+                            lblRegex = ConcatenationRegularExpression.Create(lblRegex, to.Regex);
                             RegexLabel lblFromTo = st1.GetLabelsToState(st2).FirstOrDefault() as RegexLabel;
                             if (lblFromTo != null)
                             {
-                                lblRegex = new AlternationRegularExpression(lblFromTo.Regex, lblRegex);
+                                lblRegex = AlternationRegularExpression.Create(lblFromTo.Regex, lblRegex);
                             }
                             st1.RemoveAllTransitionsTo(st2);
                             st1.AddNewTransition(new RegexLabel(lblRegex), st2);
@@ -66,18 +66,18 @@ namespace Lab2.Common
                     RegularExpression right = toFinish.Regex;
                     if (selfFinish != null)
                     {
-                        right = new ConcatenationRegularExpression(right, new KleeneStarRegularExpression(selfFinish.Regex));
+                        right = ConcatenationRegularExpression.Create(right, KleeneStarRegularExpression.Create(selfFinish.Regex));
                     }
-                    right = new ConcatenationRegularExpression(right, toStart.Regex);
+                    right = ConcatenationRegularExpression.Create(right, toStart.Regex);
                     current = current == null ?
                         right :
-                        new AlternationRegularExpression(right, current);
+                        AlternationRegularExpression.Create(right, current);
                 }
-                result = new ConcatenationRegularExpression(new KleeneStarRegularExpression(current), result);
+                result = ConcatenationRegularExpression.Create(KleeneStarRegularExpression.Create(current), result);
             }
             if (selfFinish != null)
             {
-                result = new ConcatenationRegularExpression(result, new KleeneStarRegularExpression(selfFinish.Regex));
+                result = ConcatenationRegularExpression.Create(result, KleeneStarRegularExpression.Create(selfFinish.Regex));
             }
             return result;
         }
@@ -106,7 +106,7 @@ namespace Lab2.Common
                     foreach (var sb in symbols)
                     {
                         RegularExpression symbolRegex = new SingleSymbolRegularExpression(sb);
-                        regex = (regex == null) ? symbolRegex : new AlternationRegularExpression(regex, symbolRegex);
+                        regex = (regex == null) ? symbolRegex : AlternationRegularExpression.Create(regex, symbolRegex);
                     }
                     if (regex != null)
                     {
