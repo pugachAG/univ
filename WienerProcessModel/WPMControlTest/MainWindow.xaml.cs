@@ -25,7 +25,7 @@ namespace WPMControlTest
         public MainWindow()
         {
             InitializeComponent();
-            IFunction f1 = new Func<double, double>(x => x * x).ToIFunction();
+            IFunction f1 = new Func<decimal, decimal>(x => x * x).ToIFunction();
             IFunction f2 = new Func<double, double>(x => x * Math.Sin(x)).ToIFunction();
             Random rand = new Random();
             IFunction f3 = new Func<double, double>(x => rand.NextDouble() + x).ToIFunction();

@@ -23,6 +23,8 @@ namespace WPM
         public MainWindow()
         {
             InitializeComponent();
+            canvas.PlotDrawer.MaximumY = 2;
+            canvas.PlotDrawer.MinimumY = -2;
         }
     }
 }

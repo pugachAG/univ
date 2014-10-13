@@ -73,6 +73,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Helpers\FunctionConverterExtensions.cs" />
     <Compile Include="MainViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
@@ -106,6 +107,16 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WPMControls\WPMControls.csproj">
+      <Project>{d15b781e-2191-4ce3-a33b-fcbed2f83edc}</Project>
+      <Name>WPMControls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\WPMMath\WPMMath.csproj">
+      <Project>{1ce4c3f4-e520-4c4b-b65e-b18c02c553de}</Project>
+      <Name>WPMMath</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

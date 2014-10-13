@@ -88,5 +88,13 @@ namespace WPMControls.Drawing
                    Mode = BindingMode.OneWay
                });
         }
+
+        public PlotDrawer PlotDrawer
+        {
+            get
+            {
+                return this.plotDrawer;
+            }
+        }
     }
 }

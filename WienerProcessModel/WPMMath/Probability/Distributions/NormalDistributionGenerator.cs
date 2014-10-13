@@ -38,6 +38,18 @@ namespace WPMMath.Probability.Distributions
             this.variance = variance;
         }
 
+        public decimal Mean
+        {
+            get { return mean; }
+            set { mean = value; }
+        }
+
+        public decimal Variance
+        {
+            get { return variance; }
+            set { variance = value; }
+        }
+
         public decimal GetNext()
         {
             decimal standardDistributedValue = GetStandardNormalDistributionValue();

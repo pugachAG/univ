@@ -1,8 +1,21 @@
 ﻿<Window x:Class="WPM.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ctrs="clr-namespace:WPMControls.Drawing;assembly=WPMControls"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+
+        <ctrs:PlotControl
+            DockPanel.Dock="Bottom"
+            HorizontalAlignment="Stretch"
+            VerticalAlignment="Stretch"
+            Background="Azure"
+            PlotBackground="Beige"
+            GridBackround="AntiqueWhite"
+            Functions="{Binding Functions}"
+            x:Name="canvas" >
+
+        </ctrs:PlotControl>
+
     </Grid>
 </Window>
