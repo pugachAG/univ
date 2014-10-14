@@ -209,7 +209,7 @@ namespace WPMControls.Drawing
             }
             if (e.NewValue is INotifyCollectionChanged)
             {
-                ((INotifyCollectionChanged)e.NewValue).CollectionChanged -= sender.OnFunctionsCollectionChanged;
+                ((INotifyCollectionChanged)e.NewValue).CollectionChanged += sender.OnFunctionsCollectionChanged;
             }
             GridPropertiesChanged(d, e);
         }
