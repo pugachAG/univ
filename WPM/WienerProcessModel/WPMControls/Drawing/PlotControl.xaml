@@ -32,10 +32,12 @@
             
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="60" />
                 </Grid.ColumnDefinitions>
             
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
@@ -78,6 +80,27 @@
                     Grid.Row="3"
                     Grid.Column="1"
                     Text="{Binding ElementName=plotDrawer, Path=MaximumY, Mode=TwoWay}"/>
+
+
+                <Label
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Content="CurrentX:" />
+                <TextBox 
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    IsReadOnly="True"
+                    Text="{Binding ElementName=plotDrawer, Path=CurrentMousePosition.X}"/>
+
+                <Label
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    Content="Current Y:" />
+                <TextBox 
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    IsReadOnly="True"
+                    Text="{Binding ElementName=plotDrawer, Path=CurrentMousePosition.Y}"/>
 
 
 

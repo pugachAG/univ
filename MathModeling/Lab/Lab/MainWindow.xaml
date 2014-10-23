@@ -1,8 +1,47 @@
 ﻿<Window x:Class="Lab.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:draw ="clr-namespace:WPMControls.Drawing;assembly=WPMControls"
         Title="MainWindow" Height="350" Width="525">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+            
+        </Grid.ColumnDefinitions>
+
+        <StackPanel
+            Width="200"
+            Margin="5"
+            Orientation="Vertical" >
+
+            <Separator/>
+            
+            <TextBlock
+                Margin="3"
+                Text="Time (t):" />
+            
+            <TextBox
+                Margin="3"
+                Width="50"
+                Text="{Binding TValue, Mode=TwoWay}" />
+            
+            <Slider
+                Margin="3"
+                Minimum="{Binding TMin}"
+                Maximum="{Binding TMax}"
+                Value="{Binding TValue, Mode=TwoWay}" />
+
+            <Separator />
+
+        </StackPanel>
+
+        <draw:PlotControl
+            Grid.Column="2"
+            Functions="{Binding Functions}"            
+            x:Name="canvas"
+            >
+            
+        </draw:PlotControl>
     </Grid>
 </Window>
