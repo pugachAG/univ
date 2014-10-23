@@ -49,10 +49,16 @@ namespace Lab2.Common
             StateDescription startState = regexAutomaton.GetAllStates().Where(st => st.IsStart).First();
             StateDescription finishState = regexAutomaton.GetAllStates().Where(st => st.IsFinish).First();
 
+
             RegexLabel toFinish = startState.GetLabelsToState(finishState).FirstOrDefault() as RegexLabel;
             RegexLabel toStart = finishState.GetLabelsToState(startState).FirstOrDefault() as RegexLabel;
             RegexLabel selftStart = startState.GetLabelsToState(startState).FirstOrDefault() as RegexLabel;
             RegexLabel selfFinish = finishState.GetLabelsToState(finishState).FirstOrDefault() as RegexLabel;
+
+            if (startState == finishState)
+            {
+                return KleeneStarRegularExpression.Create(selftStart.Regex) ;
+            }
 
             if (toFinish == null)
                 return EmptySetRegularExpression.EmptySet;

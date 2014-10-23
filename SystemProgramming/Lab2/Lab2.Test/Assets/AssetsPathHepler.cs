@@ -8,7 +8,7 @@ namespace Lab2.Test.Assets
 {
     public static class AssetsPathHepler
     {
-        const string AssetsFolerPrefix = "Assets//";
+        const string AssetsFolerPrefix = "Assets/";
         const string AssetsTestsSuffix = "Tests";
         const string AssetsDefinitionsSuffix = "Definition";
         const string AssetsAutomatonTestsPrefix = "Automaton";

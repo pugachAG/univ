@@ -6,6 +6,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         
@@ -15,8 +16,22 @@
             Click="Button_Click"
             Grid.Row="0" />
         
-        <draw:PlotControl
+        
+        <StackPanel
+            Height="20"
+            Orientation="Horizontal"
             Grid.Row="1"
+            >
+        <TextBox
+            x:Name="textBox1" />
+
+        <TextBox
+            x:Name="textBox2" />
+
+        </StackPanel>
+
+        <draw:PlotControl
+            Grid.Row="2"
             DockPanel.Dock="Bottom"
             HorizontalAlignment="Stretch"
             VerticalAlignment="Stretch"

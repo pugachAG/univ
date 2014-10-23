@@ -11,7 +11,7 @@ namespace Tests.RealAnalysis
     [TestClass]
     public class IntegralCalculationTester
     {
-        const double Delta = 0.01;
+        const double Delta = 0.1;
 
         [TestMethod]
         public void TestIntegralCalculation()

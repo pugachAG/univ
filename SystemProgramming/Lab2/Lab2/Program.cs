@@ -4,6 +4,7 @@ using Lab2.IO;
 using Lab2.RegularExpressions;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ namespace Lab2
 {
     class Program
     {
-        public const string FileName = @"D:\Dev\univ\SystemProgramming\Lab2\Lab2.Test\Assets\Automaton1Definition.txt";
+        public const string FileName = @"D:\";
 
         static void Main(string[] args)
         {
@@ -35,17 +36,24 @@ namespace Lab2
 
         static void Variant18()
         {
-            FiniteStateAutomaton automaton = ReadAutomaton();
-            RegularExpression regex = AutomatonToRegExConvert.StateRemovalMethod(automaton);
-            Console.WriteLine(regex.ToString());
+            List<string> allRegexs = new List<string>();
+            for (int i = 0; i < 8; i++)
+            {
+                FiniteStateAutomaton automaton = ReadAutomaton(i);
+                RegularExpression regex = AutomatonToRegExConvert.StateRemovalMethod(automaton);
+                Console.WriteLine(regex.ToString());
+                allRegexs.Add(regex.ToString());
+            }
+            File.WriteAllLines(@"D:\out.txt", allRegexs.ToArray());
         }
 
-        static FiniteStateAutomaton ReadAutomaton()
+        static FiniteStateAutomaton ReadAutomaton(int i = 0)
         {
             IAutomaton automaton = null;
             try
             {
-                string[] lines = System.IO.File.ReadAllLines(FileName);
+                string fname = FileName + "date" + (i == 0 ? "" : i.ToString()) + ".txt";
+                string[] lines = System.IO.File.ReadAllLines(fname);
                 automaton = AutomatonReader.ReadAutomaton(lines);
             }
             catch (Exception ex)
