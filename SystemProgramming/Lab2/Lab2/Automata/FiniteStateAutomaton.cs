@@ -1,4 +1,5 @@
 ﻿using Lab2.Common;
+using Lab2.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,12 +54,19 @@ namespace Lab2.Automata
             if (start == null)
                 throw new InvalidAutomatonStructureException("Start State Is Missing");
             currentStates.UnionWith(start.StateClosure());
+            Logger.AppendLine("Initial states set:");
+            LogStates(currentStates);
             foreach (char ch in word)
             {
+                Logger.AppendLine(string.Format("Processing symbol {0}:", ch));
+
                 HashSet<StateDescription> newStates = new HashSet<StateDescription>();
                 foreach (StateDescription st in currentStates)
                     newStates.UnionWith(st.FindNextStatesBySymbol(new CharSymbol(ch)));
                 currentStates = newStates;
+
+                Logger.AppendLine("New states set:");
+                LogStates(newStates);
             }
             foreach (StateDescription st in currentStates)
             {
@@ -66,6 +74,22 @@ namespace Lab2.Automata
                     return true;
             }
             return false;
+        }
+
+        private void LogStates(IEnumerable<StateDescription> states)
+        {
+            StringBuilder statesStrBuilder = new StringBuilder();
+            foreach (var state in states)
+            {
+                if (statesStrBuilder.Length > 0)
+                    statesStrBuilder.Append("; ");
+                statesStrBuilder.Append(state.Name);
+            }
+            if(statesStrBuilder.Length == 0)
+            {
+                statesStrBuilder.Append("Empty set");
+            }
+            Logger.AppendLine(statesStrBuilder.ToString());
         }
     }
 }

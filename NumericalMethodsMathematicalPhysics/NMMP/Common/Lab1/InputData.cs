@@ -9,7 +9,7 @@ namespace Common.Lab1
 {
     public static class InputData
     {
-        public const int BasisFunctionsCount = 7;
+        public const int BasisFunctionsCount = 5;
         public const double a = 0;
         public const double b = 2;
         public const double b1 = 1;
@@ -31,7 +31,7 @@ namespace Common.Lab1
         public const double a2 = 2;
         public const double a3 = 3;
         public const double a4 = 4;
-        public const double n1 = 7;
+        public const double n1 = 5;
         public const double n2 = 4;
         public const double n3 = 1;
 

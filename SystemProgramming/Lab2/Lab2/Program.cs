@@ -17,8 +17,9 @@ namespace Lab2
 
         static void Main(string[] args)
         {
-            Variant18();
-            Console.WriteLine();
+            Logger.NewStringEvent += Console.WriteLine;
+            //Variant18();
+            //Console.WriteLine();
             Variant3();
             Console.ReadLine();
         }
