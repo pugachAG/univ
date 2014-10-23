@@ -23,6 +23,11 @@ namespace Lab
         public MainWindow()
         {
             InitializeComponent();
+            canvas.PlotDrawer.MinimumX = -10;
+            canvas.PlotDrawer.MaximumX = 10;
+
+            canvas.PlotDrawer.MinimumY = -10;
+            canvas.PlotDrawer.MaximumY = 10;
         }
     }
 }
