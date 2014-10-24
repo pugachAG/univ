@@ -13,6 +13,7 @@ namespace Lab3
         ReservedWord,
         Comment,
         Space,
+        Operator,
     }
 
     public struct Lexem
@@ -73,12 +74,12 @@ namespace Lab3
 
         public static readonly string[] Operators = new string[] 
         {
-            "+",
+           @"\+",
             "-",
-            "*",
+           @"\*",
             "/",
             "%",
-            "++",
+           @"\+\+",
             "--",
             "==",
             "!=",
@@ -86,43 +87,49 @@ namespace Lab3
             "<",
             ">=",
             "<=",
-            "&",
-            "|",
+           @"\&",
+           @"\|",
             "!",
-            "^",
+           @"\^",
             "~",
             "<<",
             ">>",
             "&&",
-            "||",
-            "+=",
+           @"\|\|",
+           @"\+=",
             "-=",
-            "*=",
+           @"\*=",
             "/=",
             "%=",
             "<<=",
             ">>=",
             "&=",
-            "^=",
-            "|=",
-            ":",
-            ";",
-            ",", 
+           @"\^=",
+           @"\|=", 
+           @"\:",
+           @"\;",
+           @"\,", 
+           @"\[",
+           @"\]", 
+           @"\{",
+           @"\}",
+           @"->",
+           @"="
         };
 
         public static string KeywordsPattern;
         public static string OperatorsPattern;
-        public const string Spaces = @"(\s|\n\r|\n|\t)+";
+        public const string SpacesPattern = @"((\s|\n\r|\n|\t)+)";
 
         static Core()
         {
             KeywordsPattern = "^(" + string.Join("|", Keywords) + ")$";
-            OperatorsPattern = string.Join("|", Operators);
+            OperatorsPattern = "(" + string.Join("|", Operators) + ")";
         }
 
         public List<Lexem> Process(string input)
         {
-            MatchCollection matches = Regex.Matches(input + " ", Spaces);
+            MatchCollection matches = Regex.Matches(input + " ", string.Join("|", SpacesPattern, OperatorsPattern));
             
             StringBuilder currentLexemBuilder = new StringBuilder();
             int index = 0;
@@ -138,7 +145,7 @@ namespace Lab3
                 currentLexemBuilder.Clear();
                 index += match.Value.Length;
 
-                ProcessSpaces(match.Value, match.Index);
+                ProcessLexem(match.Value, match.Index);
             }
 
             return allLexems;
@@ -160,6 +167,14 @@ namespace Lab3
             if(Regex.IsMatch(text, KeywordsPattern))
             {
                 type = LexemType.ReservedWord;
+            }
+            else if (Regex.IsMatch(text, SpacesPattern))
+            {
+                type = LexemType.Space;
+            }
+            else if (Regex.IsMatch(text, OperatorsPattern))
+            {
+                type = LexemType.Operator;
             }
             allLexems.Add(new Lexem(text, type, indx));
         }
