@@ -12,14 +12,21 @@ namespace WPM.Helpers
     {
         public static IFunction ConvertToIFunction(this DiscreteFunction discreteFunction)
         {
+            var data = discreteFunction.Data.ToList();
             Func<decimal, decimal> func = new Func<decimal,decimal>(x =>
             {
-                foreach(var pair in discreteFunction.Data)
+                int l = 0;
+                int r = data.Count;
+                while(l < r)
                 {
-                    if(pair.Argument >= x)
-                        return pair.Value;
+                    int mid = (l + r) / 2;
+                    if (data[mid].Argument > x)
+                        r = mid - 1;
+                    else
+                        l = mid + 1;
                 }
-                return 0;
+                l = Math.Min(data.Count - 1, l);
+                return data[l].Value;
             });
 
             FuncWrapper<decimal, decimal> result = new FuncWrapper<decimal, decimal>(func);
