@@ -159,3 +159,36 @@ void Core::ProcessQueryVariation2(const string& filePath)
 
 
 }
+
+void Core::ProcessQueryVariation10(const string& filePath)
+{
+	try
+	{
+		DataProvider provider(filePath);
+		DataHandler handler;
+		while (provider.CanGetNextChunk())
+		{
+			handler.HandleChunk(provider.GetNextChunk());
+		}
+
+		map<string, int> words = handler.GetWordsCount();
+		map<int, vector<string>> counts;
+		for (map<string, int>::iterator it = words.begin(); it != words.end(); it++)
+		{
+			counts[it->second].push_back(it->first);
+		}
+
+
+		for (map<int, vector<string>>::iterator it = counts.begin(); it != counts.end(); it++)
+		{
+			for(int i = 0; i < it->second.size(); i++)
+				cout<<it->second[i]<<endl;
+		}
+	}
+	catch (exception& ex)
+	{
+		cout << "Error: " << ex.what() << endl;
+	}
+
+
+}
