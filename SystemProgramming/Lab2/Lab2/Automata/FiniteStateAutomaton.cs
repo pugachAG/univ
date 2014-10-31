@@ -13,6 +13,13 @@ namespace Lab2.Automata
     {
         private List<StateDescription> stateDescriptions = new List<StateDescription>();
 
+        public HashSet<char> Alphabet { get; private set; }
+
+        public FiniteStateAutomaton()
+        {
+            Alphabet = new HashSet<char>();
+        }
+
         public void AddNewState(StateDescription newState)
         {
             if (newState == null)

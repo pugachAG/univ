@@ -15,12 +15,14 @@ namespace WPM
     public class MainViewModel: ViewModelBase
     {
         private WienerProcess proc = new WienerProcess();
+        private int a = 0;
+        private int b = 10;
 
         public MainViewModel()
         {
             this.Functions = new ObservableCollection<IFunction>();
             //AddFunctionAndSupremum(1000);
-            AddFunctionAndIntegral(1000, x => 1000 * x * x);
+            AddFunctionAndIntegral(1000, x => (decimal)Math.Exp((double)x));
         }
 
         public ObservableCollection<IFunction> Functions { get; private set; }
@@ -34,7 +36,7 @@ namespace WPM
 
         private async void AddFunctionAndSupremum(int pointsCount)
         {
-            DiscreteFunction func = await proc.GenerateAsync(Enumerable.Range(0, pointsCount).Select(x => x / (decimal)pointsCount).ToArray());
+            DiscreteFunction func = await GenerateFunction(pointsCount);
             DiscreteFunction sup = FunctionsHelper.GetSupremumFunction(func);
             DisplayFunction(func);
             DisplayFunction(sup);
@@ -42,7 +44,7 @@ namespace WPM
 
         private async void AddFunctionAndIntegral(int pointsCount, Func<decimal, decimal> f)
         {
-            DiscreteFunction func = await proc.GenerateAsync(Enumerable.Range(0, pointsCount).Select(x => x / (decimal)pointsCount).ToArray());
+            DiscreteFunction func = await GenerateFunction(pointsCount);
             DiscreteFunction integ = FunctionsHelper.GetIntegralFunction(f, func);
             DisplayFunction(func);
             DisplayFunction(integ);
@@ -51,7 +53,7 @@ namespace WPM
 
         private async Task<DiscreteFunction> GenerateFunction(int pointsCount)
         {
-            DiscreteFunction func = await proc.GenerateAsync(Enumerable.Range(0, pointsCount).Select(x => x / (decimal)pointsCount).ToArray());
+            DiscreteFunction func = await proc.GenerateAsync(Enumerable.Range(0, pointsCount).Select(x => a + (b - a) * x / (decimal)pointsCount).ToArray());
             return func;
         }
 

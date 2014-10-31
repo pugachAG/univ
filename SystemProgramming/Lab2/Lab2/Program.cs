@@ -13,14 +13,14 @@ namespace Lab2
 {
     class Program
     {
-        public const string FileName = @"D:\";
+        public const string FileName = @"D:\test.txt";
 
         static void Main(string[] args)
         {
-            Logger.NewStringEvent += Console.WriteLine;
+            //Logger.NewStringEvent += Console.WriteLine;
             //Variant18();
             //Console.WriteLine();
-            Variant3();
+            Variant9();
             Console.ReadLine();
         }
 
@@ -48,12 +48,35 @@ namespace Lab2
             File.WriteAllLines(@"D:\out.txt", allRegexs.ToArray());
         }
 
+        static void Variant9()
+        {
+            FiniteStateAutomaton automaton = ReadAutomaton();
+            int k;
+            Console.WriteLine("Enter k:");
+            bool isParsed = int.TryParse(Console.ReadLine(), out k);
+            if (isParsed)
+            {
+                var words = GeneralHelper.GetAllWords(k, automaton.Alphabet);
+                bool ok = true;
+                foreach(var word in words)
+                {
+                    bool recognize = automaton.CheckRecognizable(word);
+                    ok &= recognize;
+                    Console.WriteLine("Check word {0}, result {1}", word, recognize);
+                }
+                Console.WriteLine("Automaton DO {0}RECOGNOZE all words with length equals {1}", ok ? "" : "NOT ", k);
+            }
+            else
+                Console.WriteLine("Wrong!!!");
+        }
+
+
         static FiniteStateAutomaton ReadAutomaton(int i = 0)
         {
             IAutomaton automaton = null;
             try
             {
-                string fname = FileName + "date" + (i == 0 ? "" : i.ToString()) + ".txt";
+                string fname = FileName;
                 string[] lines = System.IO.File.ReadAllLines(fname);
                 automaton = AutomatonReader.ReadAutomaton(lines);
             }
@@ -63,5 +86,6 @@ namespace Lab2
             }
             return automaton as FiniteStateAutomaton;
         }
+
     }
 }
