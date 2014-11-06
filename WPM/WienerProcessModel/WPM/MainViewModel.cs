@@ -20,7 +20,7 @@ namespace WPM
         {
             this.Functions = new ObservableCollection<IFunction>();
             //AddFunctionAndSupremum(1000);
-            AddFunctionAndIntegral(1000, x => 1000 * x * x);
+            AddFunctionAndIntegral(1000, x => 1000 *  x * x);
         }
 
         public ObservableCollection<IFunction> Functions { get; private set; }

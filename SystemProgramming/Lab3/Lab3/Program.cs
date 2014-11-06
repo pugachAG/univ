@@ -15,7 +15,12 @@ namespace Lab3
                 { LexemType.Unknown, ConsoleColor.Red },
                 { LexemType.ReservedWord, ConsoleColor.Blue },
                 { LexemType.Space, ConsoleColor.Black },
+                { LexemType.Number, ConsoleColor.Yellow},
+                { LexemType.Char, ConsoleColor.Magenta},
                 { LexemType.Operator, ConsoleColor.White},
+                { LexemType.Identifier, ConsoleColor.Cyan},
+                { LexemType.String, ConsoleColor.Magenta},
+                { LexemType.Comment, ConsoleColor.Green},
             };
 
 
