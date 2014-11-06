@@ -47,6 +47,7 @@
     <Compile Include="Automata\FiniteStateAutomaton.cs" />
     <Compile Include="Automata\IAutomaton.cs" />
     <Compile Include="Automata\StateDescription.cs" />
+    <Compile Include="Common\GeneralHelper.cs" />
     <Compile Include="Common\RegexLabel.cs" />
     <Compile Include="Common\RegExpAutomatonConverter.cs" />
     <Compile Include="Common\AutomatonToRegExConvert.cs" />

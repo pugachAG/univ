@@ -20,6 +20,9 @@ namespace Lab2.Automata
 
         public void AddTransition(int from, int to, char? label)
         {
+            if (label.HasValue)
+                automaton.Alphabet.Add(label.Value);
+
             StateDescription head = automaton.FindByName(from.ToString());
             StateDescription tale = automaton.FindByName(to.ToString());
             if (head == null || tale == null)

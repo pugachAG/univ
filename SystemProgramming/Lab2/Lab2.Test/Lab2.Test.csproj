@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Assets\AssetsPathHepler.cs" />
     <Compile Include="Automaton\AutomatonRecognitionTest.cs" />
+    <Compile Include="Common\GeneralHelperTester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RegularExpression\RegexMatchTester.cs" />
   </ItemGroup>

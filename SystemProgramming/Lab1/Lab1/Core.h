@@ -51,4 +51,5 @@ public:
 
 	static void ProcessQueryVariation2(const string& filePath);
 
+	static void ProcessQueryVariation10(const string& filePath);
 };
