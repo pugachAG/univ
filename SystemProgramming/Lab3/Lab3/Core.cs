@@ -120,16 +120,16 @@ namespace Lab3
            @"\{",
            @"\}",
            @"->",
-           @"="
+           @"=",
+           @"\."
         };
 
         public static string KeywordsPattern;
         public static string OperatorsPattern;
         public const string SpacesPattern = @"((\s|\n\r|\n|\t)+)";
         public const string CharPattern = @"^'.'$";
-        public const string NumberPattern = @"^[0-9]+\.?[0-9]*$";
+        public const string NumberPattern = @"^[0-9]+\.?[0-9]*$"; //actually incomplete
         public const string IdentifierPattern = @"^[_a-zA-Z][\d\w_]*$";
-        public const string StringPattern = "^\".*\"$";
 
         static Core()
         {
@@ -177,7 +177,6 @@ namespace Lab3
             FilterState state = FilterState.None;
             StringBuilder current = new StringBuilder();
             int startIndex = 0;
-            char fake = '\0';
             for (int i = 0; i < input.Length - 1; i++)
             {
                 switch (state)
@@ -238,7 +237,7 @@ namespace Lab3
                         break;
                 }
                 if (builder.Length != i + 1)
-                    builder.Append(' ');
+                    builder.Append('\0'); //ugly HACK
             }
             return builder.ToString();
         }
@@ -251,6 +250,10 @@ namespace Lab3
         private void ProcessLexem(string text, int indx)
         {
             LexemType type = LexemType.Unknown;
+
+            if (text.Contains('\0')) //HACK
+                return;
+
             if(Regex.IsMatch(text, KeywordsPattern))
             {
                 type = LexemType.ReservedWord;
