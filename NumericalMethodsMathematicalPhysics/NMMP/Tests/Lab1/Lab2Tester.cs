@@ -34,10 +34,10 @@ namespace Tests.Lab1
 
         private void ValidateSolution(BaseRealFunction sol)
         {
-            var diff = InputData2.L(sol).Sum(InputData2.f.Minus());
+            var diff = InputData2.Solution.Sum(sol.Minus()); // InputData2.L(sol).Sum(InputData2.f.Minus());
             for (double i = InputData2.a; i <= InputData2.b; i += 0.1)
             {
-                Assert.AreEqual(diff.GetValue(i), 0, 0.1);
+                Assert.AreEqual(0, diff.GetValue(i), 0.1);
             }
         }
 
