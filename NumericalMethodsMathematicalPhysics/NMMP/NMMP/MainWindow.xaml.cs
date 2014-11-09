@@ -30,6 +30,8 @@ namespace NMMP
             InitializeComponent();
         }
 
+    #region Lab1
+
         private async Task BGMethod()
         {
             btnBG.IsEnabled = false;
@@ -65,5 +67,8 @@ namespace NMMP
         {
             await BGMethod();
         }
+
+    #endregion
+
     }
 }
