@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Algebra\LinearEquationsSolverTester.cs" />
     <Compile Include="Lab1\Lab1Tester.cs" />
+    <Compile Include="Lab1\Lab2Tester.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RealAnalysis\FunctionalDerivativeTester.cs" />
     <Compile Include="RealAnalysis\IntegralCalculationTester.cs" />

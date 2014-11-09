@@ -14,14 +14,25 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
-        
-                <Button
-                    Content="Run!"
-                    x:Name="btnBG"
-                    Click="Button_Click"
-                    Grid.Row="0" />
-        
-        
+
+                <StackPanel
+                    Orientation="Horizontal"
+                    Grid.Row="0" >
+                
+                    <Button
+                        Width="100"
+                        Content="Run!"
+                        x:Name="btnBG"
+                        Click="Button_Click" />
+
+                    <Button
+                        Width="100"
+                        Content="Lab2!"
+                        x:Name="btnLab2"
+                        Click="btnLab2_Click"/>
+                </StackPanel>
+
+
                 <StackPanel
                     Height="20"
                     Orientation="Horizontal"
@@ -49,13 +60,6 @@
         
             </Grid>
             
-        </TabItem>
-
-        <TabItem Header="Lab2">
-
-
-
-
         </TabItem>
 
 
