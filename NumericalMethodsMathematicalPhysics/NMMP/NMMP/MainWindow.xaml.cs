@@ -46,19 +46,19 @@ namespace NMMP
             ObservableCollection<IFunction> functions = new ObservableCollection<IFunction>();
             BaseRealFunction solutionBG = await Lab1Solver.GetSolutionAsync(Method.BubnovGalerkin);
             functions.Add(solutionBG.ToIFunction());
-            textBox1.Text = "BG: " + Calc(InputData.Solution, solutionBG).ToString();
+            textBox1.Text = "BG: " + Calc(InputData.Solution, solutionBG, InputData.a, InputData.b).ToString();
             BaseRealFunction solutionLS = await Lab1Solver.GetSolutionAsync(Method.LeastSquares);
             functions.Add(solutionLS.ToIFunction());
-            textBox2.Text = "LS: " + Calc(InputData.Solution, solutionLS).ToString();
+            textBox2.Text = "LS: " + Calc(InputData.Solution, solutionLS, InputData.a, InputData.b).ToString();
             functions.Add(InputData.Solution.ToIFunction());
             canvas.Functions = functions;
 
             btnBG.IsEnabled = true;
         }
 
-        private double Calc(BaseRealFunction f1, BaseRealFunction f2)
+        private double Calc(BaseRealFunction f1, BaseRealFunction f2, double a, double b)
         {
-            HilbertSpace space = new HilbertSpace(InputData.a, InputData.b);
+            HilbertSpace space = new HilbertSpace(a, b);
             var df = f1.Sum(f2.Minus());
             double val = space.GetScalarProduct(df, df);
             return Math.Sqrt(val);
@@ -71,7 +71,7 @@ namespace NMMP
 
     #endregion
 
-        #region Lab1
+    #region Lab2
 
         private void goLab2()
         {
@@ -88,10 +88,12 @@ namespace NMMP
             BaseRealFunction sol = InputData2.Solution;
             functions.Add(sol.ToIFunction());
 
+            textBox1.Text = "D: " + Calc(sol, actual, InputData2.a, InputData2.b).ToString();
+
             canvas.Functions = functions;
         }
 
-        #endregion
+    #endregion
 
         private void btnLab2_Click(object sender, RoutedEventArgs e)
         {

@@ -8,7 +8,7 @@ namespace Common.RealAnalysis
 {
     public static class IntegralCalculator
     {
-        const int PartitionsCount = 1000;
+        const int PartitionsCount = 5;
         const double Epsilon = 0.00001;
 
         public static double RiemannIntegral(BaseRealFunction function, double a, double b)

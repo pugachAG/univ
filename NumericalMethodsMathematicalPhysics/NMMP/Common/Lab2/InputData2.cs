@@ -9,7 +9,7 @@ namespace Common.Lab2
 {
     public static class InputData2
     {
-        public const int PointsCount = 10;
+        public const int PointsCount = 100;
         public const double a = 0;
         public const double b = 1;
 
