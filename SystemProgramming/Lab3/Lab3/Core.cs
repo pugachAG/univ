@@ -14,6 +14,10 @@ namespace Lab3
         Comment,
         Space,
         Operator,
+        Number,
+        Char,
+        Identifier,
+        String,
     }
 
     public struct Lexem
@@ -109,17 +113,23 @@ namespace Lab3
            @"\:",
            @"\;",
            @"\,", 
+           @"\(",
+           @"\)", 
            @"\[",
            @"\]", 
            @"\{",
            @"\}",
            @"->",
-           @"="
+           @"=",
+           @"\."
         };
 
         public static string KeywordsPattern;
         public static string OperatorsPattern;
         public const string SpacesPattern = @"((\s|\n\r|\n|\t)+)";
+        public const string CharPattern = @"^'.'$";
+        public const string NumberPattern = @"^[0-9]+\.?[0-9]*$"; //actually incomplete
+        public const string IdentifierPattern = @"^[_a-zA-Z][\d\w_]*$";
 
         static Core()
         {
@@ -129,8 +139,8 @@ namespace Lab3
 
         public List<Lexem> Process(string input)
         {
+            input = Filter(input);            
             MatchCollection matches = Regex.Matches(input + " ", string.Join("|", SpacesPattern, OperatorsPattern));
-            
             StringBuilder currentLexemBuilder = new StringBuilder();
             int index = 0;
             foreach(Match match in matches)
@@ -148,12 +158,88 @@ namespace Lab3
                 ProcessLexem(match.Value, match.Index);
             }
 
-            return allLexems;
+            return allLexems.OrderBy(x => x.Index).ToList();
+        }
+
+        enum FilterState
+        {
+            None,
+            String,
+            CommentOneLine,
+            CommentMultiLine
         }
 
         private string Filter(string input)
         {
-            return input;
+            StringBuilder builder = new StringBuilder();
+            input += " ";
+        
+            FilterState state = FilterState.None;
+            StringBuilder current = new StringBuilder();
+            int startIndex = 0;
+            for (int i = 0; i < input.Length - 1; i++)
+            {
+                switch (state)
+                {
+                    case FilterState.None:
+                        bool change = false;
+                        if(input[i] == '/' && input[i+1] == '*')
+                        {
+                            state = FilterState.CommentMultiLine;
+                            change = true;
+                        }
+                        if (input[i] == '/' && input[i + 1] == '/')
+                        {
+                            state = FilterState.CommentOneLine;
+                            change = true;
+                        }
+                        if (input[i] == '"')
+                        {
+                            state = FilterState.String;
+                            change = true;
+                        }
+                        if (change)
+                        {
+                            startIndex = i;
+                            current.Append(input[i]);
+                        }
+                        else
+                            builder.Append(input[i]);
+                        break;
+                    case FilterState.String:
+                        current.Append(input[i]);
+                        if(input[i] == '"' && input[i-1] != '\\')
+                        {
+                            allLexems.Add(new Lexem(current.ToString(), LexemType.String, startIndex));
+                            current.Clear();
+                            state = FilterState.None;
+                        }
+                        break;
+                    case FilterState.CommentOneLine:
+                        current.Append(input[i]);
+                        if (input[i] == '\r' || input[i] == '\n')
+                        {
+                            allLexems.Add(new Lexem(current.ToString(), LexemType.Comment, startIndex));
+                            current.Clear();
+                            state = FilterState.None;
+                        }
+                        break;
+                    case FilterState.CommentMultiLine:
+                        current.Append(input[i]); 
+                        if (input[i-1] == '*' && input[i] == '/')
+                        {
+                            allLexems.Add(new Lexem(current.ToString(), LexemType.Comment, startIndex));
+                            current.Clear();
+                            state = FilterState.None;
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                if (builder.Length != i + 1)
+                    builder.Append('\0'); //ugly HACK
+            }
+            return builder.ToString();
         }
 
         private void ProcessSpaces(string text, int indx)
@@ -164,6 +250,10 @@ namespace Lab3
         private void ProcessLexem(string text, int indx)
         {
             LexemType type = LexemType.Unknown;
+
+            if (text.Contains('\0')) //HACK
+                return;
+
             if(Regex.IsMatch(text, KeywordsPattern))
             {
                 type = LexemType.ReservedWord;
@@ -176,6 +266,20 @@ namespace Lab3
             {
                 type = LexemType.Operator;
             }
+            else if(Regex.IsMatch(text, CharPattern))
+            {
+                type = LexemType.Char;
+            }
+            else if (Regex.IsMatch(text, NumberPattern))
+            {
+                type = LexemType.Number;
+            }
+            else if(Regex.IsMatch(text, IdentifierPattern))
+            {
+                type = LexemType.Identifier;
+            }
+            
+
             allLexems.Add(new Lexem(text, type, indx));
         }
     }

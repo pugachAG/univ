@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPMControls.Drawing;
 using System.Threading;
+using Common.Lab2;
 
 namespace NMMP
 {
@@ -29,6 +30,8 @@ namespace NMMP
         {
             InitializeComponent();
         }
+
+    #region Lab1
 
         private async Task BGMethod()
         {
@@ -65,5 +68,35 @@ namespace NMMP
         {
             await BGMethod();
         }
+
+    #endregion
+
+        #region Lab1
+
+        private void goLab2()
+        {
+            canvas.PlotDrawer.MinimumX = InputData2.a;
+            canvas.PlotDrawer.MaximumX = InputData2.b;
+            canvas.PlotDrawer.MinimumY = -1;
+            canvas.PlotDrawer.MaximumY = 1;
+
+            ObservableCollection<IFunction> functions = new ObservableCollection<IFunction>();
+
+            BaseRealFunction actual = Lab2Solver.Solve();
+            functions.Add(actual.ToIFunction());
+
+            BaseRealFunction sol = InputData2.Solution;
+            functions.Add(sol.ToIFunction());
+
+            canvas.Functions = functions;
+        }
+
+        #endregion
+
+        private void btnLab2_Click(object sender, RoutedEventArgs e)
+        {
+            goLab2();
+        }
+
     }
 }

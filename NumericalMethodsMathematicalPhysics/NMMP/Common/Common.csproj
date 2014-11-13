@@ -43,12 +43,15 @@
     <Compile Include="Algebra\Matrix.cs" />
     <Compile Include="Lab1\Lab1Solver.cs" />
     <Compile Include="Lab1\InputData.cs" />
+    <Compile Include="Lab2\InputData2.cs" />
+    <Compile Include="Lab2\Lab2Solver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RealAnalysis\FuncRealFunction.cs" />
     <Compile Include="RealAnalysis\HilbertSpace.cs" />
     <Compile Include="RealAnalysis\IntegralCalculator.cs" />
     <Compile Include="RealAnalysis\BaseRealFunction.cs" />
     <Compile Include="RealAnalysis\RealFunctionsExtensions.cs" />
+    <Compile Include="RealAnalysis\UniformGridRealFunction.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
