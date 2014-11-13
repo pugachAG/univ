@@ -11,7 +11,7 @@ namespace Common.Lab2
     {
         public const int PointsCount = 100;
         public const double a = 0;
-        public const double b = 1;
+        public const double b = 3;
 
         public static FuncRealFunction k { get { return new FuncRealFunction(x => x + 1); } }
         public static FuncRealFunction q { get { return new FuncRealFunction(x => x + 1); } }

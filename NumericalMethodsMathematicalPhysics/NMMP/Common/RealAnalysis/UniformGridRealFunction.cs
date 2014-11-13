@@ -37,7 +37,13 @@ namespace Common.RealAnalysis
             if(arg < a)
                 return vals.First();
             int index = (int)((arg - a) / h);
-            return vals[index];
+            if(index == vals.Count - 1)
+                return vals[index];
+            else
+            {
+                double lambda = 1 - (arg - (index * h + a)) / h;
+                return vals[index] *lambda + vals[index + 1] * (1 - lambda);
+            }
         }
 
         public override BaseRealFunction GetNthFunctionalDerivative(int n)
