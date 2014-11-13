@@ -9,9 +9,9 @@ namespace Common.Lab2
 {
     public static class InputData2
     {
-        public const int PointsCount = 100;
+        public const int PointsCount = 200;
         public const double a = 0;
-        public const double b = 3;
+        public const double b = 4;
 
         public static FuncRealFunction k { get { return new FuncRealFunction(x => x + 1); } }
         public static FuncRealFunction q { get { return new FuncRealFunction(x => x + 1); } }
@@ -50,7 +50,8 @@ namespace Common.Lab2
         private static double getMu(double alpha, double x, int coef)
         {
             BaseRealFunction functionalDerivative = Solution.GetNthFunctionalDerivative(1);
-            return coef * functionalDerivative.GetValue(x) * k.GetValue(x) + alpha * Solution.GetValue(x);
+            double res = coef * functionalDerivative.GetValue(x) * k.GetValue(x) + alpha * Solution.GetValue(x);
+            return res;
         }
     }
 }

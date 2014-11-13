@@ -88,7 +88,7 @@ namespace NMMP
             BaseRealFunction sol = InputData2.Solution;
             functions.Add(sol.ToIFunction());
 
-            textBox1.Text = "D: " + Calc(sol, actual, InputData2.a, InputData2.b).ToString();
+            textBox1.Text = "D: " + Calc(sol, actual, InputData2.a, InputData2.b).ToString("F99").TrimEnd("0".ToCharArray());
 
             canvas.Functions = functions;
         }
