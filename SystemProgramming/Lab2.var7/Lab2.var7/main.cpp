@@ -75,8 +75,8 @@ vector<int> move(int st, const string& str)
 	{
 		set<int> cur;
 		for (int ss : res)
-		for (int a : mp[make_pair(ss, ch)])
-			cur.insert(a);
+			for (int a : mp[make_pair(ss, ch)])
+				cur.insert(a);
 		res = cur;
 	}
 	return vector<int>(res.begin(), res.end());
