@@ -82,25 +82,23 @@ vector<int> move(int st, const string& str)
 	return vector<int>(res.begin(), res.end());
 }
 
-bool intersects(vector<int> v1, vector<int> v2)
+bool intersects(const vector<int>& v1, const vector<int>& v2)
 {
-	bool ok = false;
 	for (int a : v1)
 		for (int b : v2)
 			if (a == b)
-				ok = true;
-	return ok;
+				return true;
+	return false;
 }
 
-bool solve(string str)
+bool solve(const string& str)
 {
 	vector<int> reachable = bfs(start);
 	vector<int> sts;
 	for (int st : reachable)
 	{
 		vector<int> all = bfs(st);
-		bool ok = intersects(all, fins);
-		if (ok)
+		if (intersects(all, fins))
 			sts.push_back(st);
 	}
 
