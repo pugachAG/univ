@@ -33,14 +33,47 @@
                 Value="{Binding TValue, Mode=TwoWay}" />
 
             <Separator />
+            
+            <TextBlock
+                HorizontalAlignment="Center"
+                Margin="5"
+                Text="U(s) генеруємо"  />
+
+            <Separator />
+
+            <TextBlock
+                HorizontalAlignment="Center"
+                Margin="5"
+                Text="початкові спостереження:" />
+            
+            <TextBox
+                AcceptsReturn="True"
+                TextWrapping="Wrap"
+                Margin="5"
+                Text="{Binding InitialValuesString, UpdateSourceTrigger=PropertyChanged}" />
+            
+            <Separator />
+
+            <TextBlock
+                HorizontalAlignment="Center"
+                Margin="5"
+                Text="крайові спостереження:" />
+
+            <TextBox
+                AcceptsReturn="True"
+                TextWrapping="Wrap"
+                Margin="5"
+                Text="{Binding EdgelValuesString, UpdateSourceTrigger=PropertyChanged}" />
+
+            <Separator />
+
 
         </StackPanel>
 
         <draw:PlotControl
             Grid.Column="2"
-            Functions="{Binding Functions}"            
-            x:Name="canvas"
-            >
+            Functions="{Binding Functions}"
+            x:Name="canvas">
 
         </draw:PlotControl>
 

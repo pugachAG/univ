@@ -58,6 +58,15 @@ namespace Lab
             }
         }
 
+        public string InitialValuesString
+        {
+            set
+            {
+                InitialValues = TryParseString(value);
+            }
+        }
+
+        public List<double> InitialValues { get; set; }
 
         public MainViewModel()
         {
@@ -70,6 +79,21 @@ namespace Lab
         {
             this.Functions.Clear();
             this.Functions.Add(this.func);
+        }
+
+        private List<double> TryParseString(string str)
+        {
+            string[] strs = str.Split(new string[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+            List<double> res = new List<double>();
+            foreach(var s in strs)
+            {
+                double dbl = 0;
+                if (double.TryParse(s.Trim(), out dbl))
+                {
+                    res.Add(dbl);
+                }
+            }
+            return res;
         }
 
     }
