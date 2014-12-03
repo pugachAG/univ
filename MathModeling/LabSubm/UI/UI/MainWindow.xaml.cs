@@ -23,6 +23,10 @@ namespace UI
         public MainWindow()
         {
             InitializeComponent();
+            this.canvas.PlotDrawer.MinimumX = -10;
+            this.canvas.PlotDrawer.MaximumX = 10;
+            this.canvas.PlotDrawer.MinimumY = -10;
+            this.canvas.PlotDrawer.MaximumY = 10;
         }
     }
 }
