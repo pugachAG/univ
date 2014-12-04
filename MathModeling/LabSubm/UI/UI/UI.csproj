@@ -111,6 +111,14 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\..\NumericalMethodsMathematicalPhysics\NMMP\Common\Common.csproj">
+      <Project>{6d532d6d-df52-4323-b4dd-8915fea23ecc}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\..\NumericalMethodsMathematicalPhysics\NMMP\NMMP\NMMP.csproj">
+      <Project>{63f6755a-6ee9-4099-bbec-b04c2ae200ba}</Project>
+      <Name>NMMP</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\..\..\WPM\WienerProcessModel\WPMControls\WPMControls.csproj">
       <Project>{d15b781e-2191-4ce3-a33b-fcbed2f83edc}</Project>
       <Name>WPMControls</Name>
