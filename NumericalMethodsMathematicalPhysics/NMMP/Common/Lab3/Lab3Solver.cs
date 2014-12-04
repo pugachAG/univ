@@ -22,7 +22,8 @@ namespace Common.Lab3
                 prev[i, 0] = InputData3.u0.GetValue(i * h);
             
             double t = 0;
-            while (t < InputData3.FinishTime * InputData3.AlphaSquare / (InputData3.l * InputData3.l))
+            double tmax = InputData3.FinishTime * InputData3.AlphaSquare / (InputData3.l * InputData3.l);
+            while (t < tmax)
             {
                 Matrix<double> A = new Matrix<double>(K + 1, K + 1);
                 Matrix<double> B = new Matrix<double>(K + 1, 1);

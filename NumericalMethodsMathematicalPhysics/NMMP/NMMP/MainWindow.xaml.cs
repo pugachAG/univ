@@ -96,24 +96,32 @@ namespace NMMP
 
     #endregion
 
-        #region Lab2
+    #region Lab3
 
         private void goLab3()
         {
             canvas.PlotDrawer.MinimumX = 0;
             canvas.PlotDrawer.MaximumX = 1;
-            canvas.PlotDrawer.MinimumY = -2;
-            canvas.PlotDrawer.MaximumY = 2;
+            canvas.PlotDrawer.MinimumY = -3;
+            canvas.PlotDrawer.MaximumY = 1;
 
             ObservableCollection<IFunction> functions = new ObservableCollection<IFunction>();
 
             BaseRealFunction actual = Lab3Solver.Solve();
             functions.Add(actual.ToIFunction());
 
+            double tmp = InputData3.FinishTime;
+
+            InputData3.FinishTime = 0;
+            BaseRealFunction init = Lab3Solver.Solve();
+            functions.Add(init.ToIFunction());
+
+            InputData3.FinishTime = tmp;
+
             canvas.Functions = functions;
         }
 
-        #endregion
+    #endregion
 
         private void btnLab2_Click(object sender, RoutedEventArgs e)
         {
