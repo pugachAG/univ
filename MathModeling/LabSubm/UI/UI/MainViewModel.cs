@@ -100,7 +100,10 @@ namespace Lab
             yfunc = new FuncRealFunction(x => y(x, TValue)).ToIFunction();
 
             var fx = new FuncRealFunction(x => y(x, TValue)).GetNthFunctionalDerivative(1);
-            ufunc = fx.ToIFunction();
+            var fy = new FuncRealFunction(x =>
+                new FuncRealFunction(t =>
+                    y(x, t)).GetNthFunctionalDerivative(1).GetValue(TValue));
+            ufunc = fy.ToIFunction();
 
             this.InitialValuesString = "1 2" + Environment.NewLine + 
                 "2 3" + Environment.NewLine + 
