@@ -18,6 +18,7 @@ using System.Windows.Shapes;
 using WPMControls.Drawing;
 using System.Threading;
 using Common.Lab2;
+using Common.Lab3;
 
 namespace NMMP
 {
@@ -95,9 +96,33 @@ namespace NMMP
 
     #endregion
 
+        #region Lab2
+
+        private void goLab3()
+        {
+            canvas.PlotDrawer.MinimumX = 0;
+            canvas.PlotDrawer.MaximumX = 1;
+            canvas.PlotDrawer.MinimumY = -2;
+            canvas.PlotDrawer.MaximumY = 2;
+
+            ObservableCollection<IFunction> functions = new ObservableCollection<IFunction>();
+
+            BaseRealFunction actual = Lab3Solver.Solve();
+            functions.Add(actual.ToIFunction());
+
+            canvas.Functions = functions;
+        }
+
+        #endregion
+
         private void btnLab2_Click(object sender, RoutedEventArgs e)
         {
             goLab2();
+        }
+
+        private void btnLab3_Click(object sender, RoutedEventArgs e)
+        {
+            goLab3();
         }
 
     }

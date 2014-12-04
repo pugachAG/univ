@@ -30,6 +30,12 @@
                         Content="Lab2!"
                         x:Name="btnLab2"
                         Click="btnLab2_Click"/>
+
+                    <Button
+                        Width="100"
+                        Content="Lab3!"
+                        x:Name="btnLab3"
+                        Click="btnLab3_Click"/>
                 </StackPanel>
 
 
