@@ -36,6 +36,14 @@
                         Content="Lab3!"
                         x:Name="btnLab3"
                         Click="btnLab3_Click"/>
+                    
+                    <Slider
+                        Minimum="1"
+                        Maximum="200"
+                        Width="200"
+                        Margin="5,0,5,0"
+                        ValueChanged="Slider_ValueChanged" />
+                    
                 </StackPanel>
 
 

@@ -125,5 +125,10 @@ namespace NMMP
             goLab3();
         }
 
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            InputData3.FinishTime = ((Slider)sender).Value;
+        }
+
     }
 }

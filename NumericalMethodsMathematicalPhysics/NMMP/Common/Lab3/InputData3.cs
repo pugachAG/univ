@@ -10,7 +10,7 @@ namespace Common.Lab3
     public static class InputData3
     {
         public static double sigma = 0.5;
-        public static int K = 10;
+        public static int K = 100;
         public static double tau = 0.1;
 
         public static double l = 0.1;
