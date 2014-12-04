@@ -15,12 +15,17 @@ namespace Lab
     {
         public ObservableCollection<IFunction> Functions { get; private set; }
 
-        Func<double, double, double> y = (x, t) => Math.Sin(t * x) * x + Math.Sin(t);
+        Func<double, double, double> y = (x, t) =>
+            //Math.Sin(t * x);
+            //Math.Sin(t * x) * x + Math.Sin(t);
+            x * x * t;
+
 
         private double tMin = 0;
         private double tMax = 10;
         private double tValue = 0;
-        private IFunction func;
+        private IFunction yfunc;
+        private IFunction ufunc;
 
         public double TMin
         {
@@ -92,7 +97,10 @@ namespace Lab
         {
             this.Functions = new ObservableCollection<IFunction>();
             tValue = tMin;
-            func = new FuncRealFunction(x => y(x, TValue)).ToIFunction();
+            yfunc = new FuncRealFunction(x => y(x, TValue)).ToIFunction();
+
+            var fx = new FuncRealFunction(x => y(x, TValue)).GetNthFunctionalDerivative(1);
+            ufunc = fx.ToIFunction();
 
             this.InitialValuesString = "1 2" + Environment.NewLine + 
                 "2 3" + Environment.NewLine + 
@@ -105,7 +113,8 @@ namespace Lab
         private void RedrawFunction()
         {
             this.Functions.Clear();
-            this.Functions.Add(this.func);
+            this.Functions.Add(this.yfunc);
+            this.Functions.Add(this.ufunc);
             if (InitialValues != null && InitialValues.Count > 1)
             {
                 this.Functions.Add(InitialValuesFuncDrawing);
