@@ -103,7 +103,7 @@ namespace NMMP
             canvas.PlotDrawer.MinimumX = 0;
             canvas.PlotDrawer.MaximumX = 1;
             canvas.PlotDrawer.MinimumY = -3;
-            canvas.PlotDrawer.MaximumY = 1;
+            canvas.PlotDrawer.MaximumY = 200;
 
             ObservableCollection<IFunction> functions = new ObservableCollection<IFunction>();
 

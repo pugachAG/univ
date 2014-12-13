@@ -29,15 +29,15 @@ namespace Common.Lab3
                 Matrix<double> B = new Matrix<double>(K + 1, 1);
                 A[0, 0] = 1; 
                 A[K, K] = 1;
-                B[0, 0] = 0;
-                B[K, 0] = 0;
+                B[0, 0] = InputData3.f.GetValue(0) * tau;
+                B[K, 0] = InputData3.f.GetValue(1) * tau;
                 for (int i = 1; i < K; i++)
                 {
                     A[i, i - 1] = -tau * sigma;
                     A[i, i] = h * h + 2 * tau * sigma;
                     A[i, i + 1] = -tau * sigma;
 
-                    B[i, 0] = tau * (1 - sigma) * (prev[i - 1, 0] - 2 * prev[i, 0] + prev[i + 1, 0]) + h * h * prev[i, 0];
+                    B[i, 0] = tau * (1 - sigma) * (prev[i - 1, 0] - 2 * prev[i, 0] + prev[i + 1, 0]) + h * h * prev[i, 0] + InputData3.f.GetValue(i * h) * tau * h * h;
                 }
 
                 t += tau;
