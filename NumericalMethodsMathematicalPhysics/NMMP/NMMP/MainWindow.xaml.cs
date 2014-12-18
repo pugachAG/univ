@@ -89,7 +89,7 @@ namespace NMMP
             BaseRealFunction sol = InputData2.Solution;
             functions.Add(sol.ToIFunction());
 
-            textBox1.Text = "D: " + Calc(sol, actual, InputData2.a, InputData2.b).ToString("F99").TrimEnd("0".ToCharArray());
+            textBox1.Text = "D: " + DoubleToString(Calc(sol, actual, InputData2.a, InputData2.b));
 
             canvas.Functions = functions;
         }
@@ -107,18 +107,31 @@ namespace NMMP
 
             ObservableCollection<IFunction> functions = new ObservableCollection<IFunction>();
 
-            BaseRealFunction actual = Lab3Solver.Solve();
+            UniformGridRealFunction actual = Lab3Solver.Solve();
             functions.Add(actual.ToIFunction());
+            PrintOutput(actual);
 
             double tmp = InputData3.FinishTime;
 
             InputData3.FinishTime = 0;
-            BaseRealFunction init = Lab3Solver.Solve();
+            UniformGridRealFunction init = Lab3Solver.Solve();
             functions.Add(init.ToIFunction());
 
             InputData3.FinishTime = tmp;
 
             canvas.Functions = functions;
+        }
+
+        private void PrintOutput(UniformGridRealFunction func)
+        {
+            StringBuilder builder = new StringBuilder();
+            double N = 10;
+            for (double i = 0; i <= N; i++)
+            {
+                double x = i / N;
+                builder.AppendLine(DoubleToString(func.GetValue(x)));
+            }
+            tbOutput.Text = builder.ToString();
         }
 
     #endregion
@@ -136,6 +149,11 @@ namespace NMMP
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             InputData3.FinishTime = ((Slider)sender).Value;
+        }
+
+        private string DoubleToString(double val)
+        {
+            return val.ToString("F99").TrimEnd("0".ToCharArray());
         }
 
     }
