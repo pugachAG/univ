@@ -10,7 +10,7 @@ namespace Common.Lab3
     public static class InputData3
     {
         public static double sigma = 0.5;
-        public static int K = 100;
+        public static int K = 50;
         public static double tau = 0.01;
 
         public static double l = 0.02;
@@ -24,10 +24,10 @@ namespace Common.Lab3
             x => 3500
             );
 
-        public static double lambda = 45.5;
-        public static double c = 0.46 * 1000;
-        public static double rho = 7900;
-        public static double gamma = 140;
+        public static double lambda = 220;
+        public static double c = 0.89 * 1000;
+        public static double rho = 2700;
+        public static double gamma = 300;
 
         public static double AlphaSquare
         {
