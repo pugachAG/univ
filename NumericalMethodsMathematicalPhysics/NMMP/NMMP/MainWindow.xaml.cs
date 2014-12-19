@@ -91,6 +91,8 @@ namespace NMMP
 
             textBox1.Text = "D: " + DoubleToString(Calc(sol, actual, InputData2.a, InputData2.b));
 
+            PrintOutput(sol.Sum(actual).Minus());
+
             canvas.Functions = functions;
         }
 
@@ -102,8 +104,8 @@ namespace NMMP
         {
             canvas.PlotDrawer.MinimumX = 0;
             canvas.PlotDrawer.MaximumX = 1;
-            canvas.PlotDrawer.MinimumY = -3;
-            canvas.PlotDrawer.MaximumY = 200;
+            canvas.PlotDrawer.MinimumY = 273;
+            canvas.PlotDrawer.MaximumY = 500;
 
             ObservableCollection<IFunction> functions = new ObservableCollection<IFunction>();
 
@@ -122,7 +124,7 @@ namespace NMMP
             canvas.Functions = functions;
         }
 
-        private void PrintOutput(UniformGridRealFunction func)
+        private void PrintOutput(BaseRealFunction func)
         {
             StringBuilder builder = new StringBuilder();
             double N = 10;
@@ -148,7 +150,7 @@ namespace NMMP
 
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
-            InputData3.FinishTime = ((Slider)sender).Value;
+            //InputData3.FinishTime = ((Slider)sender).Value;
         }
 
         private string DoubleToString(double val)

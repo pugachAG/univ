@@ -15,15 +15,16 @@ namespace Common.Lab3
 
         public static double l = 0.02;
         public static double FinishTime = 10;
-        public static double TemperatureEnd = 0;
+        public static double TemperatureEnd = 273;
         public static FuncRealFunction u0 = new FuncRealFunction(
-            x => 0
+            x => 273 + 20
             //x => - 10 * x * Math.Sin(Math.PI * x)
             );
         public static FuncRealFunction f = new FuncRealFunction(
-            x => 3500
+            x => 0
             );
 
+        public static bool IsInit = true;
         public static double lambda = 45.5;
         public static double c = 0.46 * 1000;
         public static double rho = 7900;
