@@ -76,6 +76,13 @@
             
         </TabItem>
 
-
+        <TabItem Header="Output" >
+            <TextBox
+                x:Name="tbOutput"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                AcceptsReturn="True"
+                TextWrapping="Wrap"/>
+        </TabItem>
     </TabControl>
 </Window>

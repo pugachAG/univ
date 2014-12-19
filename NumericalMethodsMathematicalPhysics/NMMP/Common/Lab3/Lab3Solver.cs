@@ -29,8 +29,8 @@ namespace Common.Lab3
                 Matrix<double> B = new Matrix<double>(K + 1, 1);
                 A[0, 0] = 1; 
                 A[K, K] = 1;
-                B[0, 0] = InputData3.f.GetValue(0) * tau;
-                B[K, 0] = InputData3.f.GetValue(1) * tau;
+                B[0, 0] = 20;
+                B[K, 0] = 20;
                 for (int i = 1; i < K; i++)
                 {
                     A[i, i - 1] = -tau * sigma;
